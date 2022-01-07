@@ -1,0 +1,38 @@
+
+version: 2
+
+models:
+  - name: blocks
+    description: Ethereum blocks
+    columns:
+      - name: number
+        description: "Block number for this block"
+        tests:
+          - unique
+          - not_null
+      - name: hash
+        description: "Hash of this block"
+        tests:
+          - unique
+          - not_null
+      - name: timestamp
+        description: "timestamp when block was mined"
+      - name: size
+        description: "size for this block"
+  - name: transactions
+    description: Ethereum transactions
+    columns:
+      - name: block_number
+        description: "Block number of this transaction"
+        tests:
+          - not_null
+      - name: transaction_index
+        description: "Index of the transaction within this block"
+        tests:
+          - not_null
+      - name: value
+        description: "Value of the transaction in wei (1 eth = 10^18 wei)"
+        tests:
+          - not_null
+      - name: block_timestamp
+        description: "Timestamp when block this transaction was in was mined"
