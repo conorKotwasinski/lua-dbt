@@ -20,19 +20,70 @@ models:
       - name: size
         description: "size for this block"
   - name: transactions
-    description: Ethereum transactions
+    description: >
+      Transactions are cryptographically signed instructions from accounts. 
+      An account will initiate a transaction to update the state of the Ethereum network. 
+      The simplest transaction is transferring ETH from one account to another.
+    meta:
+      url: https://ethereum.org/en/developers/docs/transactions/
+    # "block_number", 
+    # "transaction_index",
+    # "hash",
+    # "nonce",
+    # "from_address",
+    # "to_address",
+    # "value",
+    # "gas",
+    # "gas_price",
+    # "input",
+    # "block_timestamp",
+    # "max_fee_per_gas",
+    # "max_priority_fee_per_gas",
+    # "transaction_type"
     columns:
       - name: block_number
         description: "Block number of this transaction"
         tests:
           - not_null
-      - name: transaction_index
-        description: "Index of the transaction within this block"
-        tests:
-          - not_null
-      - name: value
-        description: "Value of the transaction in wei (1 eth = 10^18 wei)"
-        tests:
-          - not_null
       - name: block_timestamp
         description: "Timestamp when block this transaction was in was mined"
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+        tests:
+          - not_null
+      - name: nonce
+        description: "The nonce is used to ensure that each transaction is unique."
+        tests:
+          - not_null
+      - name: to_address
+        description: "The receiving address (if an externally-owned account, the transaction will transfer value. If a contract account, the transaction will execute the contract code)"
+        meta:
+          search: recipient
+          aliases:
+            - to
+            - recipient
+      - name: from_address
+        description: "The identifier of the sender. This is generated when the sender's private key signs the transaction and confirms the sender has authorized this transaction"
+        tests:
+          - not_null
+        meta:
+          search: signature
+          aliases:
+            - from
+            - signature
+      - name: value
+        description: "The amount of ETH to transfer from sender to recipient (in WEI, a denomination of ETH, 1 eth = 10^18 wei)"
+      - name: gas
+        description: "The fee required to conduct a transaction on Ethereum successfully."
+      - name: gas_price
+        description: "Gas price per unit."
+      - name: max_fee_per_gas
+        description: "Maximum limit user is willing to pay for their transaction to be executed."
+      - name: max_priority_fee_per_gas
+        description: "A fee (tip) to incentivize miners to include a transaction in the block."
+      - name: transaction_type
+        description: "0 = Legacy, 1 = Access List, 2 = Dynamic Fee"
+      - name: hash
+        description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
+        tests:
+          - not_null
