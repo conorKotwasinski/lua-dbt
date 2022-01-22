@@ -148,3 +148,19 @@ models:
         description: "Integer of the event index position in the block"
       - name: transaction_index
         description: "Index of this transaction within the block"
+
+metrics:
+  - name: blocks_count
+    label: Blocks
+    model: blocks
+    description: "The total number of blocks"
+    type: count
+    sql: number
+    meta: {}
+  - name: blocks_uniq
+    label: Blocks
+    model: transactions
+    description: "The unique number of blocks"
+    type: uniq
+    sql: block_numbers
+    meta: {}
