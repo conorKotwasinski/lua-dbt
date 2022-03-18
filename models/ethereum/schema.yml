@@ -148,7 +148,51 @@ models:
         description: "Integer of the event index position in the block"
       - name: transaction_index
         description: "Index of this transaction within the block"
-
+# "block_hash",
+# "block_number",
+# "transaction_hash",
+# "transaction_index",
+# "log_index",
+# -- {% for payment_method in ["owner", "expires", "label", "cost", "name"] %}
+# -- sum(case when payment_method = '{{payment_method}}' then amount end) as {{payment_method}}_amount,
+# -- {% endfor %}
+# max(case when e."name" = 'name' then e."value" end) as "domain",
+# max(case when e."name" = 'expires' then toDateTime(e."value") end) as "expires",
+# max(case when e."name" = 'owner' then e."value" end) as "owner",
+# max(case when e."name" = 'cost' then e."value" end) as "cost",
+# max(case when e."name" = 'label' then e."value" end) as "label"
+  - name: domains
+    description: >
+      n place of human-readable names, ENS works purely with fixed length 256-bit cryptographic hashes. 
+      In order to derive the hash from a name while still preserving its hierarchal properties, 
+      a process called Namehash is used. For example, the namehash of 'alice.eth' is 
+      0x787192fc5378cc32aa956ddfdedbf26b24e8d78e40109add0eea2c1a012c3dec; this is the representation 
+      of names that is used exclusively inside ENS.
+    meta:
+      url: https://docs.ens.domains/contract-api-reference/name-processing
+    columns:
+      - name: block_number
+        description: "Block number of the transaction associated with this "
+        tests:
+          - not_null
+      - name: block_hash
+        description: "A unique identifier for the block"
+        tests:
+          - not_null
+      - name: transaction_hash
+        description: "Integer of the event index position in the block"
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+      - name: log_index
+        description: "Integer of the event index position in the block"
+      - name: domain
+        description: "ENS domain that was purchased."
+      - name: expires
+        description: "Expiration date of the domain"
+      - name: owner
+        description: "Address that owns the domain"
+      - name: cost
+        description: "How much the domain was purchased for (in wei)"
 metrics:
   - name: blocks_count
     label: Blocks

@@ -28,7 +28,12 @@ select
 "gas_price",
 "input",
 "block_timestamp",
+-- r."gas_used",
 "max_fee_per_gas",
 "max_priority_fee_per_gas",
 "transaction_type"
-from "transactions"
+-- r."status"
+from 
+"default"."transactions" as t 
+-- left join
+-- "default"."receipts" as r on t."hash" = r."transaction_hash"
