@@ -80,14 +80,14 @@ models:
         tests:
           - not_null
       - name: to_address
-        description: "The receiving address (if an externally-owned account, the transaction will transfer value. If a contract account, the transaction will execute the contract code)"
+        description: "The receiving address (in lowercase)"
         meta:
           search: recipient
           aliases:
             - to
             - recipient
       - name: from_address
-        description: "The identifier of the sender. This is generated when the sender's private key signs the transaction and confirms the sender has authorized this transaction"
+        description: "The identifier of the sender (in lowercase)"
         tests:
           - not_null
         meta:
@@ -189,6 +189,18 @@ models:
         description: "Address that owns the domain"
       - name: cost
         description: "How much the domain was purchased for (in wei)"
+  - name: tags
+    description: >
+      Tags of addresses known to be associated with some real world entity (e.g. Coinbase)
+    meta:
+      url: https://luabase.notion.site/Tags-521d6955dc1e472ba37dba71569666a3
+    columns:
+      - name: address
+        description: "The unique public key identifier that points to an Ethereum-compatible wallet"
+        tests:
+          - not_null
+      - name: tag
+        description: "Public name tag (often a company / entity) associated with the address"
 metrics:
   - name: blocks_count
     label: Blocks
