@@ -19,5 +19,6 @@
 
 select 
 "address",
-"name_tag" as "tag"
+"name_tag" as "tag",
+"label" as "label"
 from default.name_tags2_local
