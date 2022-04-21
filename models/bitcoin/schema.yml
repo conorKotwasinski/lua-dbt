@@ -1,0 +1,67 @@
+
+version: 2
+
+models:
+  - name: bitcoin_blocks
+    schema: bitcoin
+    alias: blocks
+    description: "Blocks are batches of transactions with a hash of the previous block in the chain."
+    columns:
+      - name: number
+        description: "The length of the blockchain (count of blocks)"
+        tests:
+          - unique
+          - not_null
+      - name: hash
+        description: "A unique identifier for the block"
+        tests:
+          - unique
+          - not_null
+      - name: timestamp
+        description: "The time when the block was mined"
+      - name: weight
+        description: "Size of block in bytes"
+      - name: stripped_size
+        description: "Stripped size of block in bytes"
+      - name: size
+        description: "Size of block in bytes"
+      - name: version
+        description: "Version"
+      - name: merkle_root
+        description: "The root hash of the Merkle tree of all the transactions in the block (32 byte string)"
+      - name: miner
+        description: "The address of the miner who mined the block"
+      - name: nonce
+        description: "The nonce used to mine the block"
+      - name: bits
+        description: ""
+      - name: coinbase_param
+        description: ""
+      - name: transaction_count
+        description: "Transaction count"
+  # - name: bitcoin_transactions
+  #   description: >
+  #     Transactions are cryptographically signed instructions from accounts. 
+  #     An account will initiate a transaction to update the state of the Ethereum network. 
+  #     The simplest transaction is transferring ETH from one account to another.
+  #   meta:
+  #     url: https://ethereum.org/en/developers/docs/transactions/
+  #   columns:
+  #     - name: block_number
+  #       description: "Block number of this transaction"
+  #       tests:
+  #         - not_null
+  #     - name: block_hash
+  #       description: "A unique identifier for the block"
+  #       tests:
+  #         - not_null
+  #     - name: block_timestamp
+  #       description: "Timestamp when block this transaction was in was mined"
+  #     - name: transaction_index
+  #       description: "Index of this transaction within the block"
+  #       tests:
+  #         - not_null
+  #     - name: hash
+  #       description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
+  #       tests:
+  #         - not_null
