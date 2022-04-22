@@ -34,7 +34,6 @@ models:
       - name: transaction_count
         description: "# of transactions in the block"
         meta:
-        # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
           explore:
             title: "Blocks by day"
             sql: |
