@@ -35,7 +35,7 @@ models:
         description: "# of transactions in the block"
         meta:
           explore:
-            title: "Blocks by day"
+            title: "Transactions by day"
             sql: |
               select 
               toDate(toDateTime(t.timestamp)) as "xAxis",
@@ -70,6 +70,17 @@ models:
         description: "The hash of the root node of the trie that contains the receipts of all transactions listed in this block."
       - name: gas_used
         description: "The amount of gas used by the block"
+        meta:
+          explore:
+            title: "Gas by day"
+            sql: |
+              select 
+              toDate(toDateTime(t.timestamp)) as "xAxis",
+              sum(gas_used) as "series_0"
+              from ethereum.blocks as t 
+              where timestamp > 0
+              group by "xAxis"
+              order by "xAxis" asc
       - name: gas_limit
         description: "The gas limit allowed in the block"
       - name: base_fee_per_gas
