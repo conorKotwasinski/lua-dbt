@@ -18,10 +18,11 @@ models:
       - name: timestamp
         description: "The time when the block was mined"
         meta:
+        # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
           exploreSql: |
             select 
-            toDate(toDateTime(t.timestamp)) as "timestamp",
-            count(1) as "count"
+            toDate(toDateTime(t.timestamp)) as "xAxis",
+            count(1) as "series_0"
             from ethereum.blocks as t 
             group by timestamp
             order by timestamp asc
