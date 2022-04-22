@@ -33,6 +33,18 @@ models:
         description: "Size of block in bytes"
       - name: transaction_count
         description: "# of transactions in the block"
+        meta:
+        # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
+          explore:
+            title: "Blocks by day"
+            sql: |
+              select 
+              toDate(toDateTime(t.timestamp)) as "xAxis",
+              sum(transaction_count) as "series_0"
+              from ethereum.blocks as t 
+              where timestamp > 0
+              group by "xAxis"
+              order by "xAxis" asc
       - name: transactions_root
         description: "The root hash of the Merkle tree of all the transactions in the block (32 byte string)"
       - name: miner
