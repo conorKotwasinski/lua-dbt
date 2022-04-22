@@ -17,6 +17,14 @@ models:
           - not_null
       - name: timestamp
         description: "The time when the block was mined"
+        meta:
+          exploreSql: |
+            select 
+            toDate(toDateTime(t.timestamp)) as "timestamp",
+            count(1) as "count"
+            from ethereum.blocks as t 
+            group by timestamp
+            order by timestamp asc
       - name: size
         description: "Size of block in bytes"
       - name: transaction_count
