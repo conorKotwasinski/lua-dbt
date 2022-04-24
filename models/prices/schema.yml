@@ -10,13 +10,12 @@ models:
         description: "Time when price was recorded in UTC in 5 minute intervals"
         meta:
           explore:
-            title: "USD by day"
+            title: "USD high by day"
             sql: |
               select 
-              toDate(toDateTime(t.timestamp)) as "xAxis",
-              count(1) as "series_0"
-              from ethereum.blocks as t 
-              where timestamp > 0
+              toDate(t.timestamp) as "xAxis",
+              max(price_high) as "series_0"
+              from prices.eth_usd as t 
               group by "xAxis"
               order by "xAxis" asc
       - name: price_low
