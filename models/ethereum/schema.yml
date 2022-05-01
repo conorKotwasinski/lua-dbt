@@ -249,6 +249,19 @@ models:
         description: "Index of this log within this transactions logs"
       - name: address
         description: "Address that logged this event"
+        meta:
+        # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
+          explore:
+            title: "Contracts decoded"
+            sql: |
+              select 
+              count(1) as "series_0",
+              t.tag as "xAxis"
+              from ethereum.events as e left join
+              ethereum.tags as t on e."address" = t."address"
+              group by "xAxis"
+              order by "series_0" desc
+              limit 15
       - name: abi_name
         description: "ABI event name"
       - name: name
@@ -297,6 +310,8 @@ models:
           - not_null
       - name: tag
         description: "Public name tag (often a company / entity) associated with the address"
+      - name: label
+        description: "Label / category of the tag"
 metrics:
   - name: blocks_count
     label: Blocks
