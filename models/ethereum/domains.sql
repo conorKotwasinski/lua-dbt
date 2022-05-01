@@ -33,6 +33,7 @@ max(case when e."name" = 'cost' then e."value" end) as "cost"
 -- max(case when e."name" = 'label' then e."value" end) as "label"
 from {{ ref('events') }} as e
 where e.abi_name = 'NameRegistered'
+and e."address" = lower('0x283Af0B28c62C092C9727F1Ee09c02CA627EB7F5')
 group by 
 "block_hash",
 "block_number",

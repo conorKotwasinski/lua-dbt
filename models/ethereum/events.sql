@@ -2,8 +2,8 @@
 {{ config(materialized='view') }}
 
 select 
-"block_hash",
 "block_number",
+"block_hash",
 "transaction_hash",
 "transaction_index",
 "log_index",
