@@ -253,6 +253,7 @@ models:
         # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
           explore:
             title: "Contracts decoded"
+            type: "bar"
             sql: |
               select 
               count(1) as "series_0",
