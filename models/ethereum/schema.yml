@@ -12,6 +12,20 @@ models:
         tests:
           - unique
           - not_null
+        meta:
+        # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
+          explore:
+            title: "Blocks"
+            type: "bigNumber"
+            subheader: "Mining {{past_30_days}} per day (last 30 days)"
+            sql: |
+              select 
+              toDate(toDateTime(t.timestamp)) as "xAxis",
+              count(1) as "total",
+              sum(case when b.timestamp >= subtractDays(today(), 30) then 1 else 0 end) / 30 as past_30_days,
+              min("number") as "min",
+              max("number") as "max"
+              from ethereum.blocks as t 
       - name: hash
         description: "A unique identifier for the block"
         tests:
