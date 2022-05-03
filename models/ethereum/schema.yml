@@ -20,12 +20,11 @@ models:
             subheader: "Mining {{past_30_days}} per day (last 30 days)"
             sql: |
               select 
-              toDate(toDateTime(t.timestamp)) as "xAxis",
               count(1) as "total",
               sum(case when b.timestamp >= subtractDays(today(), 30) then 1 else 0 end) / 30 as past_30_days,
               min("number") as "min",
               max("number") as "max"
-              from ethereum.blocks as t 
+              from ethereum.blocks as b
       - name: hash
         description: "A unique identifier for the block"
         tests:
