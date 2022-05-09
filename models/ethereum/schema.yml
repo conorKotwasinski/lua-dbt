@@ -18,6 +18,9 @@ models:
             title: "Blocks"
             type: "bigNumber"
             subheader: "Mining {{past_30_days}} per day (last 30 days)"
+            formats:
+              past_30_days: '#,##0'
+              total: '#,##0.0,,"M"'
             sql: |
               select 
               count(1) as "total",
@@ -109,6 +112,27 @@ models:
       The simplest transaction is transferring ETH from one account to another.
     meta:
       url: https://ethereum.org/en/developers/docs/transactions/
+      joins:
+        to_domains:
+          db: ethereum
+          table: domains
+          type: left
+          on: transactions.to_address = to_domains.owner
+        from_domains:
+          db: ethereum
+          table: domains
+          type: left
+          on: transactions.from_address = from_domains.owner
+        to_tags:
+          db: ethereum
+          table: tags
+          type: left
+          on: transactions.from_address = to_tags.owner
+        from_tags:
+          db: ethereum
+          table: tags
+          type: left
+          on: transactions.from_address = from_tags.owner
     columns:
       - name: block_number
         description: "Block number of this transaction"
