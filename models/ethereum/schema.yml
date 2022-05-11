@@ -117,22 +117,22 @@ models:
           db: ethereum
           table: domains
           type: left
-          on: transactions.to_address = to_domains.owner
+          sql_on: transactions.to_address = to_domains.owner
         from_domains:
           db: ethereum
           table: domains
           type: left
-          on: transactions.from_address = from_domains.owner
+          sql_on: transactions.from_address = from_domains.owner
         to_tags:
           db: ethereum
           table: tags
           type: left
-          on: transactions.from_address = to_tags.owner
+          sql_on: transactions.from_address = to_tags.owner
         from_tags:
           db: ethereum
           table: tags
           type: left
-          on: transactions.from_address = from_tags.owner
+          sql_on: transactions.from_address = from_tags.owner
     columns:
       - name: block_number
         description: "Block number of this transaction"
