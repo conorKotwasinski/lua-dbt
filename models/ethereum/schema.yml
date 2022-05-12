@@ -123,7 +123,7 @@ models:
           db: ethereum
           table: domains
           type: left
-          left_column: to_address
+          left_column: from_address
           sql_on: transactions.from_address = from_domains.owner
         to_tags:
           db: ethereum
