@@ -200,6 +200,17 @@ models:
         description: "The fee required to conduct a transaction on Ethereum successfully."
       - name: gas_price
         description: "Gas price per unit."
+        meta:
+          explore:
+            title: "Avg gas price by day"
+            sql: |
+              select 
+              toDate(toDateTime(t.block_timestamp)) as "xAxis",
+              avg("gas_price"/1e9) as "series_0"
+              from ethereum.transactions as t 
+              where block_timestamp > 0
+              group by "xAxis"
+              order by "xAxis"  
       - name: max_fee_per_gas
         description: "Maximum limit user is willing to pay for their transaction to be executed."
       - name: max_priority_fee_per_gas
@@ -293,7 +304,7 @@ models:
         meta:
         # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
           explore:
-            title: "Contracts decoded"
+            title: "Events decoded by contract"
             type: "bar"
             sql: |
               select 
@@ -304,6 +315,31 @@ models:
               group by "xAxis"
               order by "series_0" desc
               limit 15
+        meta:
+          explore:
+            title: "Percent decoded by contract"
+            type: "bar"
+            sql: |
+              select  
+                  distinct
+                  count_decoded / count_available as "series_0"
+                  ,t.tag as "xAxis"
+              from (select 
+                      address 
+                      ,count(distinct block_number) as count_decoded
+                      from ethereum.events
+                      group by address, name
+                  ) e
+              inner join (select 
+                      address 
+                      ,count(distinct block_number) as count_available
+                      from ethereum.logs
+                      group by address 
+                  ) l
+                  on l.address = e.address
+              inner join ethereum.tags t on e.address = t.address
+              order by series_0 desc 
+              limit 20
       - name: abi_name
         description: "ABI event name"
       - name: name
@@ -354,6 +390,18 @@ models:
         description: "Public name tag (often a company / entity) associated with the address"
       - name: label
         description: "Label / category of the tag"
+        explore:
+            title: "Tags by label"
+            type: "bar"
+            sql: |
+                select 
+                count(1) as "series_0",
+                t.label as "xAxis"
+                from ethereum.tags t
+                where t.label != ''
+                group by "xAxis"
+                order by "series_0" desc
+                limit 15
 metrics:
   - name: blocks_count
     label: Blocks
