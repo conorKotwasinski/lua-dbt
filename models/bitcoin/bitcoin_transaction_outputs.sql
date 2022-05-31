@@ -1,4 +1,4 @@
-{{ config(materialized='view') }}
+{{ config(materialized='view', alias='transaction_outputs', schema='bitcoin') }}
 
 
 -- SELECT *
