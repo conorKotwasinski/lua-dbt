@@ -127,7 +127,7 @@ models:
           - not_null
   - name: bitcoin_transaction_inputs
     schema: bitcoin
-    alias: transactions
+    alias: transaction_inputs
     description: >
       Bitcoin transactions are broadcast between peers in a serialized byte format, called raw format. 
       It is this form of a transaction which is SHA256(SHA256()) hashed to create the TXID and, 
@@ -206,7 +206,7 @@ models:
           - not_null
   - name: bitcoin_transaction_outputs
     schema: bitcoin
-    alias: transactions
+    alias: transaction_outputs
     description: >
       Bitcoin transactions are broadcast between peers in a serialized byte format, called raw format. 
       It is this form of a transaction which is SHA256(SHA256()) hashed to create the TXID and, 
