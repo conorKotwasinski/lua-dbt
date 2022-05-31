@@ -6,6 +6,8 @@ models:
     schema: bitcoin
     alias: blocks
     description: "Blocks are batches of transactions with a hash of the previous block in the chain."
+    meta:
+      url: https://developer.bitcoin.org/reference/block_chain.html
     columns:
       - name: number
         description: "The length of the blockchain (count of blocks)"
@@ -39,29 +41,30 @@ models:
         description: ""
       - name: transaction_count
         description: "Transaction count"
-  # - name: bitcoin_transactions
-  #   description: >
-  #     Transactions are cryptographically signed instructions from accounts. 
-  #     An account will initiate a transaction to update the state of the Ethereum network. 
-  #     The simplest transaction is transferring ETH from one account to another.
-  #   meta:
-  #     url: https://ethereum.org/en/developers/docs/transactions/
-  #   columns:
-  #     - name: block_number
-  #       description: "Block number of this transaction"
-  #       tests:
-  #         - not_null
-  #     - name: block_hash
-  #       description: "A unique identifier for the block"
-  #       tests:
-  #         - not_null
-  #     - name: block_timestamp
-  #       description: "Timestamp when block this transaction was in was mined"
-  #     - name: transaction_index
-  #       description: "Index of this transaction within the block"
-  #       tests:
-  #         - not_null
-  #     - name: hash
-  #       description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
-  #       tests:
-  #         - not_null
+  - name: bitcoin_transactions
+    description: >
+      Bitcoin transactions are broadcast between peers in a serialized byte format, called raw format. 
+      It is this form of a transaction which is SHA256(SHA256()) hashed to create the TXID and, 
+      ultimately, the merkle root of a block containing the transaction—making the transaction 
+      format part of the consensus rules.
+    meta:
+      url: https://developer.bitcoin.org/reference/transactions.html
+    columns:
+      - name: block_number
+        description: "Block number of this transaction"
+        tests:
+          - not_null
+      - name: block_hash
+        description: "A unique identifier for the block"
+        tests:
+          - not_null
+      - name: block_timestamp
+        description: "Timestamp when block this transaction was in was mined"
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+        tests:
+          - not_null
+      - name: hash
+        description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
+        tests:
+          - not_null

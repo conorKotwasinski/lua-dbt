@@ -130,13 +130,13 @@ models:
           table: tags
           type: left
           left_column: to_address
-          sql_on: transactions.to_address = to_tags.owner
+          sql_on: transactions.to_address = to_tags.address
         from_tags:
           db: ethereum
           table: tags
           type: left
           left_column: from_address
-          sql_on: transactions.from_address = from_tags.owner
+          sql_on: transactions.from_address = from_tags.address
     columns:
       - name: block_number
         description: "Block number of this transaction"
