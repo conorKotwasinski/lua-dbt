@@ -33,7 +33,7 @@ SELECT
     ,groupArray(("value")) as "outputs"
 FROM nfts
 WHERE true 
-    -- Majority of NFTs except cryptopunks use 'Transfer' trasaction type
+    -- Majority of NFTs except cryptopunks use 'Transfer' transaction type
     and ("abi_name" = 'Transfer' and address != '0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb')
     -- unique criteria for punks 
     OR "abi_name" = 'transferPunk'
