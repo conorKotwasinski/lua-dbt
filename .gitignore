@@ -1,4 +1,10 @@
-
+# dbt
 target/
 dbt_packages/
 logs/
+
+# credentials
+*.env
+
+# Other
+.DS_Store
