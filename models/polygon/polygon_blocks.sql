@@ -23,4 +23,4 @@ select
 "gas_limit",
 "base_fee_per_gas",
 "extra_data"
-from "polygon"."blocks" as b
+from "polygon"."blocks_raw" as b
