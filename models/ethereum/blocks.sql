@@ -1,5 +1,5 @@
 
-{{ config(materialized='view', database='bitcoin') }}
+{{ config(materialized='view', schema='ethereum') }}
 
 -- number:            8894460
 -- hash:              0x23ac071475225c4c6f5d74792c071598556b8b96b5883c1cefd03d19bf2452ea

@@ -31,8 +31,8 @@ CH_HOST=xxx
 
 | Value | Description |
 |---|---|
-| `CH_SCHEMA` | Dev schema/database in Clickhouse |
-| `CH_USER` | Clickhouse username |
+| `CH_SCHEMA` | Dev schema/database in Clickhouse (e.g. dbt_mjr) |
+| `CH_USER` | Clickhouse username (e.g. admin) |
 | `CH_PASSWORD` | Clickhouse password |
 | `CH_HOST` |Clickhouse host endpoint |
 
@@ -50,6 +50,10 @@ Run the debug command with dbt using
 
 ```shell
 $ dbt debug
+```
+or
+```shell
+$ dbt debug --profiles-dir ../
 ```
 
 ## Clone Table

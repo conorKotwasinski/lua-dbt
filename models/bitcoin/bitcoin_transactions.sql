@@ -1,4 +1,4 @@
-{{ config(materialized='view') }}
+{{ config(materialized='view', alias='transactions', schema='bitcoin') }}
 
 
 -- lua-2 :) select * from transactions_raw limit 2 format Vertical
