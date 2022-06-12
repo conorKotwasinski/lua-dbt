@@ -112,31 +112,31 @@ models:
     alias: transactions
     description: >
       Transactions are cryptographically signed instructions from accounts. 
-      An account will initiate a transaction to update the state of the Ethereum network. 
+      An account will initiate a transaction to update the state of the Polygon network. 
       The simplest transaction is transferring ETH from one account to another.
     meta:
       url: https://ethereum.org/en/developers/docs/transactions/
       joins:
         to_domains:
-          db: ethereum
+          db: polygon
           table: domains
           type: left
           left_column: to_address
           sql_on: transactions.to_address = to_domains.owner
         from_domains:
-          db: ethereum
+          db: polygon
           table: domains
           type: left
           left_column: from_address
           sql_on: transactions.from_address = from_domains.owner
         to_tags:
-          db: ethereum
+          db: polygon
           table: tags
           type: left
           left_column: to_address
           sql_on: transactions.to_address = to_tags.address
         from_tags:
-          db: ethereum
+          db: polygon
           table: tags
           type: left
           left_column: from_address
@@ -188,10 +188,10 @@ models:
             - from
             - signature
       - name: value
-        description: "The amount of ETH to transfer from sender to recipient (in WEI, a denomination of ETH, 1 eth = 10^18 wei)"
+        description: "The amount to transfer from sender to recipient (in WEI, a denomination of ETH, 1 eth = 10^18 wei)"
         meta:
           explore:
-            title: "ETH transacted by day"
+            title: "Transacted by day"
             sql: |
               select 
               toDate(toDateTime(t.block_timestamp)) as "xAxis",
@@ -201,7 +201,7 @@ models:
               group by "xAxis"
               order by "xAxis" asc
       - name: gas
-        description: "The fee required to conduct a transaction on Ethereum successfully."
+        description: "The fee required to conduct a transaction on Polygon successfully."
       - name: gas_price
         description: "Gas price per unit."
         meta:
@@ -229,7 +229,7 @@ models:
     schema: polygon
     alias: logs
     description: >
-      Logs are are a cheap way to store data on the Ethereum blockchain. 
+      Logs are are a cheap way to store data on the Polygon blockchain. 
       An example is using logs to store historical data that can be rendered by a frontend.
     meta:
       url: https://web3js.readthedocs.io/en/v1.5.2/web3-eth.html#getpastlogs
@@ -281,7 +281,7 @@ models:
     schema: polygon
     alias: traces
     description: >
-      Traces are a way to store extra data on the Ethereum blockchain.
+      Traces are a way to store extra data on the Polygon blockchain.
     meta:
       url: https://geth.ethereum.org/docs/dapp/tracing
       # select 

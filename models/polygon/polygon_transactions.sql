@@ -2,6 +2,7 @@
 
 select 
 "block_number", 
+"block_hash",
 "transaction_index",
 "hash",
 "nonce",
