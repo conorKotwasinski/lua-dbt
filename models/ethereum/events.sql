@@ -11,5 +11,6 @@ select
 "abi_name",
 "name",
 "type",
-"value"
-from "default"."events" as b
+"value",
+"value_hex"
+from "default"."events_local_v2" as b

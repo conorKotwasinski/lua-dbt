@@ -10,8 +10,6 @@ select
 "transactions_root",
 "miner",
 "nonce",
-"uncles",
-"mix_hash",
 "logs_bloom",
 "state_root",
 "difficulty",
