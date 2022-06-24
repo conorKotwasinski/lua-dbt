@@ -300,50 +300,62 @@ models:
         meta:
         # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
           explore:
-            title: "Events decoded by contract"
+            title: "Events by contract name"
             type: "bar"
             sql: |
-              select 
-              count(1) as "series_0",
-              t.tag as "xAxis"
-              from ethereum.events as e left join
-              ethereum.tags as t on e."address" = t."address"
-              group by "xAxis"
-              order by "series_0" desc
-              limit 15
-        meta:
-          explore:
-            title: "Percent decoded by contract"
-            type: "bar"
-            sql: |
-              select  
-                  distinct
-                  count_decoded / count_available as "series_0"
-                  ,t.tag as "xAxis"
-              from (select 
-                      address 
-                      ,count(distinct block_number) as count_decoded
-                      from ethereum.events
-                      group by address, name
-                  ) e
-              inner join (select 
-                      address 
-                      ,count(distinct block_number) as count_available
-                      from ethereum.logs
-                      group by address 
-                  ) l
-                  on l.address = e.address
-              inner join ethereum.tags t on e.address = t.address
-              order by series_0 desc 
-              limit 20
+              with a1 as (
+                  select 
+                  address,
+                  count() as ct
+                  from ethereum.events AS e
+                  group by address
+                  order by ct desc
+                  limit 1500
+              )
+
+              SELECT
+              joinGet(ethereum.tags_join_engine, 'name_tag', e.address) AS "xAxis",
+              sum(ct) AS series_0
+              FROM a1 AS e
+              GROUP BY "xAxis"
+              ORDER BY series_0 DESC
+              LIMIT 15
       - name: abi_name
         description: "ABI event name"
+        meta:
+        # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
+          explore:
+            title: "ABI event names"
+            type: "bar"
+            sql: |
+              SELECT
+              abi_name AS "xAxis",
+              count(1) AS series_0
+              FROM ethereum.events AS e
+              GROUP BY "xAxis"
+              ORDER BY series_0 DESC
+              LIMIT 15
       - name: name
         description: "Event parameter name"
+        meta:
+        # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
+          explore:
+            title: "Event parameter names"
+            type: "bar"
+            sql: |
+              SELECT
+              name AS "xAxis",
+              count(1) AS series_0
+              FROM ethereum.events AS e
+              GROUP BY "xAxis"
+              ORDER BY series_0 DESC
+              LIMIT 15
       - name: type
         description: "Event parameter type"
       - name: value
         description: "Event parameter value"
+      - name: value_hex
+        description: "Event parameter value (hex)"
   - name: domains
     description: >
       The Ethereum Name Service (ENS) is a distributed, open, and extensible naming system based on the Ethereum blockchain.
@@ -351,7 +363,7 @@ models:
       url: https://docs.ens.domains/
     columns:
       - name: block_number
-        description: "Block number of the transaction associated with this "
+        description: "Block number of the transaction associated with this domain"
         tests:
           - not_null
       - name: block_hash
