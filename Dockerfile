@@ -5,8 +5,6 @@ COPY requirements.txt /
 RUN pip3 --default-timeout=600 install -r requirements.txt
 
 FROM base-reqs as project
-WORKDIR /dbt
-COPY dbt /dbt/
-COPY updateLuaSchema.py profiles.yml /
-
 ENV CH_SCHEMA=default CH_USER=admin CH_HOST=lua-2.luabase.altinity.cloud
+COPY lua_dbt.sh /
+ENTRYPOINT ["/lua_dbt.sh"]
