@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clone () {
-    git clone -b main --single-branch https://github.com/luabase/lua-dbt
+    git clone -b 'test/pipeline' --single-branch https://github.com/luabase/lua-dbt
     cd lua-dbt
 }
 
