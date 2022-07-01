@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: polygon
+    database: polygon
+    description: Polygon raw data
+    loader: https://github.com/luabase/lua-py
+    tables:
+      - name: blocks_raw
+      - name: logs_raw
+      - name: traces_raw
+      - name: transactions_raw
