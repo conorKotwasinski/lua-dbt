@@ -2,7 +2,6 @@ version: 2
 
 sources:
   - name: prices
-    database: prices
     description: Prices raw data
     tables:
       - name: btc_usd_raw

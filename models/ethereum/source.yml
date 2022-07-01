@@ -1,8 +1,7 @@
 version: 2
 
 sources:
-  - name: default  # cannot rename this
-    database: default
+  - name: default
     description: Ethereum raw data
     loader: https://github.com/luabase/lua-py
     tables:

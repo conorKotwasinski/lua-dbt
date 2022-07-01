@@ -2,7 +2,6 @@ version: 2
 
 sources:
   - name: bitcoin
-    database: bitcoin
     description: Bitcoin raw data
     loader: https://github.com/luabase/lua-py
     quoting:
