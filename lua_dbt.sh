@@ -10,7 +10,7 @@ run_dbt () {
 }
 
 update_pg () {
-    echo "we updating posgtres!"
+    python updateLuaSchema.py
 }
 
 
