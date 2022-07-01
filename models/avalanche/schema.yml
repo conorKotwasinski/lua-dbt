@@ -4,6 +4,55 @@ models:
   - name: avalanche_blocks
     config:
       alias: blocks
+    description: '{{ doc("block_model_description") }}'
+    columns:
+      - name: number
+        description: '{{ doc("block_number") }}'
+        tests:
+          - unique
+          - not_null
+      - name: timestamp
+        description: '{{ doc("block_timestamp") }}'
+        tests:
+          - unique
+          - not_null
+      - name: hash
+        description: '{{ doc("block_hash") }}'
+        tests:
+          - unique
+          - not_null
+      - name: parent_hash
+        description: '{{ doc("parent_hash") }}'
+      - name: nonce
+        description: '{{ doc("nonce") }}'
+      - name: sha3_uncles
+        description: '{{ doc("sha3_uncles") }}'
+      - name: logs_bloom
+        description: '{{ doc("logs_bloom") }}'
+      - name: transactions_root
+        description: '{{ doc("transactions_root") }}'
+      - name: state_root
+        description: '{{ doc("state_root") }}'
+      - name: receipts_root
+        description: '{{ doc("receipts_root") }}'
+      - name: miner
+        description: '{{ doc("miner") }}'
+      - name: difficulty
+        description: '{{ doc("difficulty") }}'
+      - name: total_difficulty
+        description: '{{ doc("total_difficulty") }}'
+      - name: size
+        description: '{{ doc("size") }}'
+      - name: extra_data
+        description: '{{ doc("extra_data") }}'
+      - name: gas_limit
+        description: '{{ doc("gas_limit") }}'
+      - name: gas_used
+        description: '{{ doc("gas_used") }}'
+      - name: transaction_count
+        description: '{{ doc("transaction_count") }}'
+      - name: base_fee_per_gas
+        description: '{{ doc("base_fee_per_gas") }}'
 
   - name: avalanche_contracts
     config:
