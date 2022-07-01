@@ -85,7 +85,7 @@ if __name__ == '__main__':
     for db in df.database.unique():
         print(f'doing db: {db}')
         # with open(f'./luabase/models/{db}/schema.yml', 'r') as stream:
-        with open(f'dbt/models/{db}/schema.yml', 'r') as stream:
+        with open(f'models/{db}/schema.yml', 'r') as stream:
             try:
                 y = yaml.safe_load(stream)
                 chCols = df[df.database == db].to_dict(orient='records')
