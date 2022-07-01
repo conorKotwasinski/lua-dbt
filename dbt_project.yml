@@ -24,15 +24,13 @@ tests:
 
 models:
   luabase:
+    avalanche:
+      +schema: "{{ 'avalanche_test' if target.name == 'dev' else 'avalanche' }}"
     bitcoin:
-      +materialized: view
       +schema: "{{ 'bitcoin_test' if target.name == 'dev' else 'bitcoin' }}"
     ethereum:
-      +materialized: view
       +schema: "{{ 'ethereum_test' if target.name == 'dev' else 'ethereum' }}"
     polygon:
-      +materialized: view
       +schema: "{{ 'polygon_test' if target.name == 'dev' else 'polygon' }}"
     prices:
-      +materialized: view
       +schema: "{{ 'prices_test' if target.name == 'dev' else 'prices' }}"

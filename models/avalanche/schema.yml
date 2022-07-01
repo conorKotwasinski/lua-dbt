@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: avalanche_blocks
+    config:
+      alias: blocks
+
+  - name: avalanche_contracts
+    config:
+      alias: contracts
+
+  - name: avalanche_logs
+    config:
+      alias: logs
+
+  - name: avalanche_token_transfers
+    config:
+      alias: token_transfers
+
+  - name: avalanche_tokens
+    config:
+      alias: tokens
+
+  - name: avalanche_traces
+    config:
+      alias: traces
+
+  - name: avalanche_transactions
+    config:
+      alias: transactions
