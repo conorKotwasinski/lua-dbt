@@ -17,17 +17,22 @@ clean-targets:
   - "dbt_packages"
   - "logs"
 
+tests:
+  luabase:
+    regression:
+      enabled: false
+
 models:
   luabase:
     bitcoin:
       +materialized: view
-      +database: bitcoin
+      +schema: "{{ 'bitcoin_test' if target.name == 'dev' else 'bitcoin' }}"
     ethereum:
       +materialized: view
-      +database: ethereum
+      +schema: "{{ 'ethereum_test' if target.name == 'dev' else 'ethereum' }}"
     polygon:
       +materialized: view
-      +database: polygon
+      +schema: "{{ 'polygon_test' if target.name == 'dev' else 'polygon' }}"
     prices:
       +materialized: view
-      +database: prices
+      +schema: "{{ 'prices_test' if target.name == 'dev' else 'prices' }}"
