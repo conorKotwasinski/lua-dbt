@@ -1,5 +1,2 @@
-{{ config(materialized='view', schema='prices') }}
-
-
 select *
-from prices.eth_usd_raw
+from {{ source('prices', 'eth_usd_raw') }}
