@@ -3,7 +3,7 @@ with filtered_traces as (
         to_address,
         from_address,
         value
-    from polygon.traces
+    from {{ ref('polygon_traces') }}
     where status = 1
         and (call_type not in ('delegatecall', 'callcode', 'staticcall', '') or call_type is null)
 ),
@@ -30,8 +30,8 @@ tx_fees_debits as (
         block.number as block_number,
         block.miner as address,
         sum(tx.gas * tx.gas_price) as value
-    from polygon.transactions as tx
-        inner join polygon.blocks as block on tx.block_number = block.number
+    from {{ ref('polygon_transactions') }} as tx
+        inner join {{ ref('polygon_blocks') }} as block on tx.block_number = block.number
     group by
         block.timestamp,
         block.number,
@@ -44,7 +44,7 @@ tx_fees_credits as (
         block_number,
         from_address as address,
         -1 * (gas * gas_price) as value
-    from polygon.transactions
+    from {{ ref('polygon_transactions') }}
 ),
 
 double_entry_ledger as (
