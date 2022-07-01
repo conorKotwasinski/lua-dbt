@@ -6,7 +6,7 @@ clone () {
 }
 
 run_dbt () {
-    echo "we runnning dbt!"
+    dbt run --profiles-dir=. --profile luabase --select path:models/test
 }
 
 update_pg () {
