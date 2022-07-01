@@ -4,7 +4,7 @@ config-version: 2
 
 profile: luabase
 
-model-paths: [ "models" ]
+model-paths: [ "models", "docs" ]
 analysis-paths: [ "analyses" ]
 test-paths: [ "tests" ]
 seed-paths: [ "seeds" ]
