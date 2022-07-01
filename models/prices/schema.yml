@@ -1,9 +1,7 @@
-
 version: 2
 
 models:
   - name: eth_usd
-    schema: prices
     description: "ETH to USD price"
     columns:
       - name: timestamp
@@ -28,8 +26,8 @@ models:
         description: "High price during the interval"
       - name: volume
         description: "Trade volume during the interval"
+
   - name: btc_usd
-    schema: prices
     description: "BTC to USD price"
     columns:
       - name: timestamp
@@ -44,8 +42,8 @@ models:
         description: "High price during the interval"
       - name: volume
         description: "Trade volume during the interval"
+
   - name: sol_usd
-    schema: prices
     description: "SOL to USD price"
     columns:
       - name: timestamp
