@@ -1,21 +1,8 @@
-{{ config(materialized='view') }}
--- transaction_hash:         0xb4a76859e71d2e741d1d90238c6b10e09bac273bbb9d6d48c802b9b76389d17c
--- log_index:                51
--- nft_contract_address:     0x8a90cab2b38dba80c64b7734e58ee1db38b8992e               
--- block_number:             14693081
--- from_address:             0x5a6bb42a124034b07db4ab5753120dfff68db7b7
--- to_address:               0x8ad52c3ab4233341f7a5b25dd0ebc4dcc26c53ee
--- nft_token_id:             6187
--- event_type:               Transfer
--- exchange_name:            Opensea
--- price:                    260000000000000000
-
-
-with 
+with
 -- Initial filter for NFTs, 
 -- since tags currently doesn't map NFTs cleanly
 "nfts" as (
-select * from "ethereum"."events" 
+select * from {{ ref('events') }}
 where address in ('0xed5af388653567af2f388e6224dc7c4b3241c544'
     ,'0x8a90cab2b38dba80c64b7734e58ee1db38b8992e'
     ,'0x7bd29408f11d2bfc23c34f18275bbf23bb716bc7'
@@ -68,8 +55,8 @@ select
     ,e."abi_name" 
     ,e."name" 
     ,e."value" as "cost" 
-from "ethereum"."events" e
-    left join "ethereum"."tags" t on t."address" = e."address"
+from {{ ref('events') }} e
+    left join {{ ref('tags') }} t on t."address" = e."address"
 where true 
     -- limit to known exchanges
     and e."address" in (
@@ -86,5 +73,3 @@ select
     ,m."cost"
 from "transfers" t
     left join "marketplace_events" m on m."transaction_hash" = t."transaction_hash"
-
-
