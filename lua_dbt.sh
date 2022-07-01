@@ -1,12 +1,18 @@
 #!/bin/bash
 
 clone () {
-    git clone -b 'test/pipeline' --single-branch https://github.com/luabase/lua-dbt
+    local branch="$1"
+    git clone -b $branch --single-branch https://github.com/luabase/lua-dbt
     cd lua-dbt
 }
 
 run_dbt () {
-    dbt run --profiles-dir=. --profile luabase --select path:models/test
+    if [[ "$1" == "test" ]]
+    then
+        dbt run --profiles-dir=. --profile luabase --select path:models/test
+    else
+        dbt run --profiles-dir=. --profile luabase
+    fi
 }
 
 update_pg () {
@@ -24,11 +30,15 @@ case "$1" in
         update_pg
         ;;
     "run_dbt_and_update")
-        clone
+        clone main
         run_dbt && update_pg
+        ;;
+    "run_dbt_and_update_test")
+        clone 'test/pipeline'
+        run_dbt 'test' && update_pg
         ;;
     *)
         echo "Error, command not recognized: $1"
-        echo "Possible commands 'run_dbt', 'update_pg', 'run_dbt_and_update'"
+        echo "Possible commands 'run_dbt', 'update_pg', 'run_dbt_and_update', 'run_dbt_and_update_test'"
         ;;
 esac
