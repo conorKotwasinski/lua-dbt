@@ -1,0 +1,11 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'build',
+    '--build-arg', 'git_short_sha=$SHORT_SHA',
+    '--file', 'Dockerfile',
+    '-t', 'gcr.io/luabase/lua-dbt', '.'
+  ]
+
+images:
+- gcr.io/luabase/lua-dbt
