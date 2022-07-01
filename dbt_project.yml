@@ -40,3 +40,6 @@ models:
     bitcoin:
       +materialized: view
       +database: bitcoin
+    test:
+      +materialized: view
+      +database: bitcoin
