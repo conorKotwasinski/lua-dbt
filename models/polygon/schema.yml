@@ -2,7 +2,8 @@ version: 2
 
 models:
   - name: polygon_blocks
-    alias: blocks
+    config:
+      alias: blocks
     description: "Blocks are batches of transactions with a hash of the previous block in the chain."
     meta:
       url: https://ethereum.org/en/developers/docs/blocks/
@@ -107,7 +108,8 @@ models:
         description: "An optional 32-byte space to store extra data"
 
   - name: polygon_transactions
-    alias: transactions
+    config:
+      alias: transactions
     description: >
       Transactions are cryptographically signed instructions from accounts. 
       An account will initiate a transaction to update the state of the Polygon network. 
@@ -225,7 +227,8 @@ models:
           - not_null
 
   - name: polygon_logs
-    alias: logs
+    config:
+      alias: logs
     description: >
       Logs are are a cheap way to store data on the Polygon blockchain. 
       An example is using logs to store historical data that can be rendered by a frontend.
@@ -277,7 +280,8 @@ models:
         description: "Index of this transaction within the block"
 
   - name: polygon_traces
-    alias: traces
+    config:
+      alias: traces
     description: >
       Traces are a way to store extra data on the Polygon blockchain.
     meta:
@@ -351,17 +355,3 @@ models:
         description: "The error message"
       - name: status
         description: "The status of this trace"
-
-  - name: polygon_block_validators
-    alias: block_validators
-    description: Validator for a given block
-    columns:
-      - name: block_number
-        description: "Block number of the transaction associated with this "
-        tests:
-          - not_null
-          - unique
-      - name: validator
-        description: "Address of the block validator"
-        tests:
-          - not_null

@@ -2,7 +2,8 @@ version: 2
 
 models:
   - name: bitcoin_blocks
-    alias: blocks
+    config:
+      alias: blocks
     description: "Blocks are batches of transactions with a hash of the previous block in the chain."
     meta:
       url: https://developer.bitcoin.org/reference/block_chain.html
@@ -41,7 +42,8 @@ models:
         description: "Transaction count"
 
   - name: bitcoin_transactions
-    alias: transactions
+    config:
+      alias: transactions
     description: >
       Bitcoin transactions are broadcast between peers in a serialized byte format, called raw format. 
       It is this form of a transaction which is SHA256(SHA256()) hashed to create the TXID and, 
@@ -108,7 +110,8 @@ models:
           - not_null
 
   - name: bitcoin_transaction_inputs
-    alias: transaction_inputs
+    config:
+      alias: transaction_inputs
     description: >
       Bitcoin transactions are broadcast between peers in a serialized byte format, called raw format. 
       It is this form of a transaction which is SHA256(SHA256()) hashed to create the TXID and, 
@@ -173,7 +176,8 @@ models:
           - not_null
 
   - name: bitcoin_transaction_outputs
-    alias: transaction_outputs
+    config:
+      alias: transaction_outputs
     description: >
       Bitcoin transactions are broadcast between peers in a serialized byte format, called raw format. 
       It is this form of a transaction which is SHA256(SHA256()) hashed to create the TXID and, 
