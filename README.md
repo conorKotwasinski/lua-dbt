@@ -47,7 +47,7 @@ touch .env
 
 ```text
 DBT_PROFILES_DIR=.
-CH_PASSWORD=xxx
+CH_ADMIN_PASSWORD=xxx
 CH_HOST=xxx
 ```
 
@@ -84,6 +84,18 @@ using the `--target`/`-t` flag when calling dbt commands
 ```shell
 dbt build --target prod
 dbt build -t prod
+```
+
+## Help
+
+Common errors and what to do
+
+### Could not find profile named 'luabase'
+
+Ensure that you have sourced the `.env` file if you're following the dev setup above 👆
+
+```shell
+export $(grep -v '^#' .env | xargs)
 ```
 
 ## dbt Resources

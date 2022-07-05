@@ -1,5 +1,5 @@
 {# Model description #}
-{% docs block_model_description %}
+{% docs blocks_model_description %}
 
 Blocks are batches of transactions with a hash of the previous block in the chain.
 
