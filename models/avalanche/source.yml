@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: avalanche
+    description: Avalanche raw data
+    loader: https://github.com/luabase/avalanche-etl
+    tables:
+      - name: blocks_raw
+      - name: contracts_raw
+      - name: logs_raw
+      - name: token_transfers_raw
+      - name: tokens_raw
+      - name: traces_raw
+      - name: transactions_raw

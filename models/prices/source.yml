@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: prices
+    description: Prices raw data
+    tables:
+      - name: btc_usd_raw
+      - name: eth_usd_raw
+      - name: sol_usd_raw

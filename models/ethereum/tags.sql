@@ -1,11 +1,4 @@
-
-{{ config(
-    materialized='view',
-    
-    ) 
-}}
 -- schema='ens'
-
 
 -- ┌─────ct─┬─name──────────┐
 -- │ 407544 │ owner         │
@@ -18,7 +11,7 @@
 -- └────────┴───────────────┘
 
 select 
-"address",
-"name_tag" as "tag",
-"label" as "label"
-from default.name_tags2_local
+    address,
+    name_tag as tag,
+    label as label
+from {{ source('default', 'name_tags2_local') }}

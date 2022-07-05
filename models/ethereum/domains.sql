@@ -1,11 +1,4 @@
-
-{{ config(
-    materialized='view',
-    
-    ) 
-}}
 -- schema='ens'
-
 
 -- ┌─────ct─┬─name──────────┐
 -- │ 407544 │ owner         │

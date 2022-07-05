@@ -1,10 +1,9 @@
-
 version: 2
 
 models:
   - name: bitcoin_blocks
-    schema: bitcoin
-    alias: blocks
+    config:
+      alias: blocks
     description: "Blocks are batches of transactions with a hash of the previous block in the chain."
     meta:
       url: https://developer.bitcoin.org/reference/block_chain.html
@@ -41,9 +40,10 @@ models:
         description: ""
       - name: transaction_count
         description: "Transaction count"
+
   - name: bitcoin_transactions
-    schema: bitcoin
-    alias: transactions
+    config:
+      alias: transactions
     description: >
       Bitcoin transactions are broadcast between peers in a serialized byte format, called raw format. 
       It is this form of a transaction which is SHA256(SHA256()) hashed to create the TXID and, 
@@ -51,21 +51,6 @@ models:
       format part of the consensus rules.
     meta:
       url: https://developer.bitcoin.org/reference/transactions.html
-    # "hash",
-    # "size",
-    # "virtual_size",
-    # "version",
-    # "lock_time",
-    # "block_number",
-    # "block_hash",
-    # "block_timestamp",
-    # "is_coinbase",
-    # "transaction_index",
-    # "input_count",
-    # "output_count",
-    # "input_value",
-    # "output_value",
-    # "fee"
     columns:
       - name: block_number
         description: "Block number of this transaction"
@@ -79,8 +64,6 @@ models:
         description: "Timestamp when block this transaction was in was mined"
       - name: transaction_index
         description: "Index of this transaction within the block"
-        tests:
-          - not_null
       - name: hash
         description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
         tests:
@@ -125,9 +108,10 @@ models:
         description: "Fee paid"
         tests:
           - not_null
+
   - name: bitcoin_transaction_inputs
-    schema: bitcoin
-    alias: transaction_inputs
+    config:
+      alias: transaction_inputs
     description: >
       Bitcoin transactions are broadcast between peers in a serialized byte format, called raw format. 
       It is this form of a transaction which is SHA256(SHA256()) hashed to create the TXID and, 
@@ -135,20 +119,6 @@ models:
       format part of the consensus rules.
     meta:
       url: https://developer.bitcoin.org/reference/transactions.html
-    # "block_number",
-    # "block_hash",
-    # "block_timestamp",
-    # "transaction_hash",
-    # "input_index",
-    # "spent_transaction_hash",
-    # "spent_output_index",
-    # "script_asm",
-    # "script_hex",
-    # "sequence",
-    # "required_signatures",
-    # "type",
-    # "addresses",
-    # "value"
     columns:
       - name: block_number
         description: "Block number of this transaction"
@@ -204,9 +174,10 @@ models:
         description: "The value of this input"
         tests:
           - not_null
+
   - name: bitcoin_transaction_outputs
-    schema: bitcoin
-    alias: transaction_outputs
+    config:
+      alias: transaction_outputs
     description: >
       Bitcoin transactions are broadcast between peers in a serialized byte format, called raw format. 
       It is this form of a transaction which is SHA256(SHA256()) hashed to create the TXID and, 
@@ -214,17 +185,6 @@ models:
       format part of the consensus rules.
     meta:
       url: https://developer.bitcoin.org/reference/transactions.html
-    # "block_number",
-    # "block_hash",
-    # "block_timestamp",
-    # "transaction_hash",
-    # "output_index",
-    # "script_asm",
-    # "script_hex",
-    # "required_signatures",
-    # "type",
-    # "addresses",
-    # "value"
     columns:
       - name: block_number
         description: "Block number of this transaction"

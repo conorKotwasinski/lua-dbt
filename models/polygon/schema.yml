@@ -1,10 +1,9 @@
-
 version: 2
 
 models:
   - name: polygon_blocks
-    schema: polygon
-    alias: blocks
+    config:
+      alias: blocks
     description: "Blocks are batches of transactions with a hash of the previous block in the chain."
     meta:
       url: https://ethereum.org/en/developers/docs/blocks/
@@ -15,7 +14,7 @@ models:
           - unique
           - not_null
         meta:
-        # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
+          # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
           explore:
             title: "Blocks"
             type: "bigNumber"
@@ -38,7 +37,7 @@ models:
       - name: timestamp
         description: "The time when the block was mined"
         meta:
-        # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
+          # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
           explore:
             title: "Blocks by day"
             sql: |
@@ -107,9 +106,10 @@ models:
         description: "The base fee for this block (see EIP-1559)"
       - name: extra_data
         description: "An optional 32-byte space to store extra data"
+
   - name: polygon_transactions
-    schema: polygon
-    alias: transactions
+    config:
+      alias: transactions
     description: >
       Transactions are cryptographically signed instructions from accounts. 
       An account will initiate a transaction to update the state of the Polygon network. 
@@ -225,9 +225,10 @@ models:
         description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
         tests:
           - not_null
+
   - name: polygon_logs
-    schema: polygon
-    alias: logs
+    config:
+      alias: logs
     description: >
       Logs are are a cheap way to store data on the Polygon blockchain. 
       An example is using logs to store historical data that can be rendered by a frontend.
@@ -277,34 +278,14 @@ models:
         description: "Integer of the event index position in the block"
       - name: transaction_index
         description: "Index of this transaction within the block"
+
   - name: polygon_traces
-    schema: polygon
-    alias: traces
+    config:
+      alias: traces
     description: >
       Traces are a way to store extra data on the Polygon blockchain.
     meta:
       url: https://geth.ethereum.org/docs/dapp/tracing
-      # select 
-      # "block_number", 
-      # "block_hash",
-      # "block_timestamp",
-      # "transaction_hash",
-      # "transaction_index",
-      # "to_address",
-      # "from_address",
-      # "value",
-      # "input",
-      # "trace_type",
-      # "trace_id",
-      # "call_type",
-      # "reward_type",
-      # "gas",
-      # "gas_used",
-      # "subtraces",
-      # "trace_address",
-      # "error",
-      # "status"
-      # from "polygon"."traces_raw"
     columns:
       - name: block_number
         description: "Block number of the transaction associated with this "
@@ -337,8 +318,6 @@ models:
           - not_null
       - name: to_address
         description: "Address this event originated from."
-        tests:
-          - not_null
       - name: value
         description: "The amount of ETH to transfer from sender to recipient (in WEI, a denomination of ETH, 1 eth = 10^18 wei)"
         meta:

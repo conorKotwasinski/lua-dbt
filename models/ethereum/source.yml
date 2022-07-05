@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: default
+    description: Ethereum raw data
+    loader: https://github.com/luabase/lua-py
+    tables:
+      - name: blocks
+      - name: events
+        identifier: events_local_v2
+      - name: logs
+      - name: receipts
+      - name: traces
+      - name: transactions
+      - name: name_tags2_local

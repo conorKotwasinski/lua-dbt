@@ -1,5 +1,2 @@
-{{ config(materialized='view', alias='blocks', schema='bitcoin') }}
-
-
 select *
-from bitcoin.blocks_raw
+from {{ source('bitcoin', 'blocks_raw') }}

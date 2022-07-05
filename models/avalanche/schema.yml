@@ -1,0 +1,170 @@
+version: 2
+
+models:
+  - name: avalanche_blocks
+    config:
+      alias: blocks
+    description: '{{ doc("blocks_model_description") }}'
+    columns:
+      - name: number
+        description: '{{ doc("block_number") }}'
+        tests:
+          - unique
+          - not_null
+      - name: timestamp
+        description: '{{ doc("block_timestamp") }}'
+        tests:
+          - not_null
+      - name: hash
+        description: '{{ doc("block_hash") }}'
+        tests:
+          - unique
+          - not_null
+      - name: parent_hash
+        description: '{{ doc("parent_hash") }}'
+      - name: nonce
+        description: '{{ doc("nonce") }}'
+      - name: sha3_uncles
+        description: '{{ doc("sha3_uncles") }}'
+      - name: logs_bloom
+        description: '{{ doc("logs_bloom") }}'
+      - name: transactions_root
+        description: '{{ doc("transactions_root") }}'
+      - name: state_root
+        description: '{{ doc("state_root") }}'
+      - name: receipts_root
+        description: '{{ doc("receipts_root") }}'
+      - name: miner
+        description: '{{ doc("miner") }}'
+      - name: difficulty
+        description: '{{ doc("difficulty") }}'
+      - name: total_difficulty
+        description: '{{ doc("total_difficulty") }}'
+      - name: size
+        description: '{{ doc("size") }}'
+      - name: extra_data
+        description: '{{ doc("extra_data") }}'
+      - name: gas_limit
+        description: '{{ doc("gas_limit") }}'
+      - name: gas_used
+        description: '{{ doc("gas_used") }}'
+      - name: transaction_count
+        description: '{{ doc("transaction_count") }}'
+      - name: base_fee_per_gas
+        description: '{{ doc("base_fee_per_gas") }}'
+
+  - name: avalanche_contracts
+    config:
+      alias: contracts
+
+  - name: avalanche_logs
+    config:
+      alias: logs
+    description: '{{ doc("logs_model_description") }}'
+    columns:
+      - name: block_number
+        description: '{{ doc("block_number") }}'
+        tests:
+          - not_null
+      - name: block_timestamp
+        description: '{{ doc("block_timestamp") }}'
+        tests:
+          - not_null
+      - name: block_hash
+        description: '{{ doc("block_hash") }}'
+        tests:
+          - not_null
+      - name: transaction_hash
+        description: '{{ doc("transaction_hash") }}'
+        tests:
+          - not_null
+      - name: transaction_index
+        description: '{{ doc("transaction_index") }}'
+        tests:
+          - not_null
+      - name: log_index
+        description: '{{ doc("log_index") }}'
+        tests:
+          - not_null
+      - name: address
+        description: '{{ doc("log_address") }}'
+        tests:
+          - not_null
+      - name: data
+        description: '{{ doc("log_data") }}'
+      - name: topic1
+        description: '{{ doc("topic") }}'
+      - name: topic2
+        description: '{{ doc("topic") }}'
+      - name: topic3
+        description: '{{ doc("topic") }}'
+      - name: topic4
+        description: '{{ doc("topic") }}'
+
+  - name: avalanche_token_transfers
+    config:
+      alias: token_transfers
+
+  - name: avalanche_tokens
+    config:
+      alias: tokens
+
+  - name: avalanche_traces
+    config:
+      alias: traces
+
+  - name: avalanche_transactions
+    config:
+      alias: transactions
+    description: '{{ doc("transactions_model_description") }}'
+    columns:
+      - name: block_number
+        description: '{{ doc("block_number") }}'
+        tests:
+          - not_null
+      - name: block_timestamp
+        description: '{{ doc("block_timestamp") }}'
+        tests:
+          - not_null
+      - name: block_hash
+        description: '{{ doc("block_hash") }}'
+        tests:
+          - not_null
+      - name: hash
+        description: '{{ doc("transaction_hash") }}'
+        tests:
+          - unique
+          - not_null
+      - name: nonce
+        description: '{{ doc("transaction_nonce") }}'
+        tests:
+          - not_null
+      - name: transaction_index
+        description: '{{ doc("transaction_index") }}'
+        tests:
+          - not_null
+      - name: from_address
+        description: '{{ doc("from_address") }}'
+        tests:
+          - not_null
+      - name: to_address
+        description: '{{ doc("to_address") }}'
+      - name: value
+        description: '{{ doc("transaction_value") }}'
+      - name: gas
+        description: '{{ doc("gas") }}'
+      - name: gas_price
+        description: '{{ doc("gas_price") }}'
+      - name: input
+      - name: receipt_root
+      - name: receipt_status
+      - name: receipt_gas_used
+      - name: receipt_cumulative_gas_used
+      - name: receipt_effective_gas_price
+      - name: receipt_contract_address
+      - name: max_fee_per_gas
+        description: '{{ doc("max_fee_per_gas") }}'
+      - name: max_priority_fee_per_gas
+        description: '{{ doc("max_priority_fee_per_gas") }}'
+      - name: transaction_type
+        description: '{{ doc("transaction_type") }}'
