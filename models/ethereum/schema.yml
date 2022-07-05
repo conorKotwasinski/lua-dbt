@@ -439,6 +439,20 @@ models:
         description: "[If available] Marketplace on which event occurred"
       - name: cost
         description: "How much the NFT was purchased for (in wei)"
+
+  - name: abis
+    description: Application binary interface (ABI) for select Ethereum contracts with contract name
+    columns:
+      - name: address
+        description: Address for contract
+        tests:
+          - unique
+          - not_null
+      - name: abi
+        description: Contract ABI (learn [more](https://www.quicknode.com/guides/solidity/what-is-an-abi))
+      - name: name
+        description: Contract name
+
 metrics:
   - name: blocks_count
     label: Blocks

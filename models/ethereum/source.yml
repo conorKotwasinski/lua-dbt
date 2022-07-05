@@ -13,3 +13,8 @@ sources:
       - name: traces
       - name: transactions
       - name: name_tags2_local
+
+  - name: staging
+    description: Staged raw data
+    tables:
+      - name: ethereum_abis
