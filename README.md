@@ -86,6 +86,18 @@ dbt build --target prod
 dbt build -t prod
 ```
 
+## Help
+
+Common errors and what to do
+
+### Could not find profile named 'luabase'
+
+Ensure that you have sourced the `.env` file if you're following the dev setup above 👆
+
+```shell
+export $(grep -v '^#' .env | xargs)
+```
+
 ## dbt Resources
 
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
