@@ -47,7 +47,7 @@ touch .env
 
 ```text
 DBT_PROFILES_DIR=.
-CH_PASSWORD=xxx
+CH_ADMIN_PASSWORD=xxx
 CH_HOST=xxx
 ```
 
