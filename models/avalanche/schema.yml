@@ -4,54 +4,54 @@ models:
   - name: avalanche_blocks
     config:
       alias: blocks
-    description: '{{ doc("blocks_model_description") }}'
+    description: Blocks are batches of transactions with a hash of the previous block in the chain.
     columns:
       - name: number
-        description: '{{ doc("block_number") }}'
+        description: The length of the blockchain (count of blocks)
         tests:
           - unique
           - not_null
       - name: timestamp
-        description: '{{ doc("block_timestamp") }}'
+        description: The time when the block was mined
         tests:
           - not_null
       - name: hash
-        description: '{{ doc("block_hash") }}'
+        description: A unique identifier for the block
         tests:
           - unique
           - not_null
       - name: parent_hash
-        description: '{{ doc("parent_hash") }}'
+        description: The hash of the parent (prior) block
       - name: nonce
-        description: '{{ doc("nonce") }}'
+        description: The nonce used to mine the block
       - name: sha3_uncles
-        description: '{{ doc("sha3_uncles") }}'
+        description: A sibling block of the parent block
       - name: logs_bloom
-        description: '{{ doc("logs_bloom") }}'
+        description: The bloom filter for the logs in the block
       - name: transactions_root
-        description: '{{ doc("transactions_root") }}'
+        description: The root hash of the Merkle tree of all the transactions in the block (32 byte string)
       - name: state_root
-        description: '{{ doc("state_root") }}'
+        description: The root of the state trie at the end of the block
       - name: receipts_root
-        description: '{{ doc("receipts_root") }}'
+        description: The hash of the root node of the trie that contains the receipts of all transactions listed in this block
       - name: miner
-        description: '{{ doc("miner") }}'
+        description: The address of the miner who mined the block
       - name: difficulty
-        description: '{{ doc("difficulty") }}'
+        description: The effort required to mine the block
       - name: total_difficulty
-        description: '{{ doc("total_difficulty") }}'
+        description: Cumulative difficulty of all blocks until the current block
       - name: size
-        description: '{{ doc("size") }}'
+        description: Size of block in bytes
       - name: extra_data
-        description: '{{ doc("extra_data") }}'
+        description: An optional 32-byte space to store extra data
       - name: gas_limit
-        description: '{{ doc("gas_limit") }}'
+        description: The amount of gas used by the block
       - name: gas_used
-        description: '{{ doc("gas_used") }}'
+        description: The gas limit allowed in the block
       - name: transaction_count
-        description: '{{ doc("transaction_count") }}'
+        description: Number of transactions in the block
       - name: base_fee_per_gas
-        description: '{{ doc("base_fee_per_gas") }}'
+        description: The base fee for this block (see EIP-1559)
 
   - name: avalanche_contracts
     config:
@@ -60,46 +60,50 @@ models:
   - name: avalanche_logs
     config:
       alias: logs
-    description: '{{ doc("logs_model_description") }}'
+    description: >
+      Logs are a cheap way to store data on-chain.
+      An example is using logs to store historical data that can be rendered by a frontend.
     columns:
       - name: block_number
-        description: '{{ doc("block_number") }}'
+        description: The length of the blockchain (count of blocks)
         tests:
           - not_null
       - name: block_timestamp
-        description: '{{ doc("block_timestamp") }}'
+        description: The time when the block was mined
         tests:
           - not_null
       - name: block_hash
-        description: '{{ doc("block_hash") }}'
+        description: A unique identifier for the block
         tests:
           - not_null
       - name: transaction_hash
-        description: '{{ doc("transaction_hash") }}'
+        description: >
+          With the signature hash, the transaction can be cryptographically proven that it came from the sender 
+          and submitted to the network.
         tests:
           - not_null
       - name: transaction_index
-        description: '{{ doc("transaction_index") }}'
+        description: Index of this transaction within the block
         tests:
           - not_null
       - name: log_index
-        description: '{{ doc("log_index") }}'
+        description: Integer of the event index position in the block
         tests:
           - not_null
       - name: address
-        description: '{{ doc("log_address") }}'
+        description: Address this event originated from
         tests:
           - not_null
       - name: data
-        description: '{{ doc("log_data") }}'
+        description: The data containing non-indexed log parameter
       - name: topic1
-        description: '{{ doc("topic") }}'
+        description: Topic 1-3 contains indexed parameters of the log
       - name: topic2
-        description: '{{ doc("topic") }}'
+        description: Topic 1-3 contains indexed parameters of the log
       - name: topic3
-        description: '{{ doc("topic") }}'
+        description: Topic 1-3 contains indexed parameters of the log
       - name: topic4
-        description: '{{ doc("topic") }}'
+        description: Topic 1-3 contains indexed parameters of the log
 
   - name: avalanche_token_transfers
     config:
@@ -116,45 +120,49 @@ models:
   - name: avalanche_transactions
     config:
       alias: transactions
-    description: '{{ doc("transactions_model_description") }}'
+    description: >
+      Transactions are cryptographically signed instructions from accounts.
+      An account will initiate a transaction to update the state of the network.
     columns:
       - name: block_number
-        description: '{{ doc("block_number") }}'
+        description: The length of the blockchain (count of blocks)
         tests:
           - not_null
       - name: block_timestamp
-        description: '{{ doc("block_timestamp") }}'
+        description: The time when the block was mined
         tests:
           - not_null
       - name: block_hash
-        description: '{{ doc("block_hash") }}'
+        description: A unique identifier for the block
         tests:
           - not_null
       - name: hash
-        description: '{{ doc("transaction_hash") }}'
+        description: >
+          With the signature hash, the transaction can be cryptographically proven that it came from the sender 
+          and submitted to the network.
         tests:
           - unique
           - not_null
       - name: nonce
-        description: '{{ doc("transaction_nonce") }}'
+        description: The nonce is used to ensure that each transaction is unique.
         tests:
           - not_null
       - name: transaction_index
-        description: '{{ doc("transaction_index") }}'
+        description: Index of this transaction within the block
         tests:
           - not_null
       - name: from_address
-        description: '{{ doc("from_address") }}'
+        description: The sending address
         tests:
           - not_null
       - name: to_address
-        description: '{{ doc("to_address") }}'
+        description: The receiving address
       - name: value
-        description: '{{ doc("transaction_value") }}'
+        description: The amount transferred from sender to recipient
       - name: gas
-        description: '{{ doc("gas") }}'
+        description: The fee required to conduct a transaction
       - name: gas_price
-        description: '{{ doc("gas_price") }}'
+        description: Gas price per unit.
       - name: input
       - name: receipt_root
       - name: receipt_status
@@ -163,8 +171,8 @@ models:
       - name: receipt_effective_gas_price
       - name: receipt_contract_address
       - name: max_fee_per_gas
-        description: '{{ doc("max_fee_per_gas") }}'
+        description: Maximum limit user is willing to pay for their transaction to be executed.
       - name: max_priority_fee_per_gas
-        description: '{{ doc("max_priority_fee_per_gas") }}'
+        description: A fee (tip) to incentivize miners to include a transaction in the block.
       - name: transaction_type
-        description: '{{ doc("transaction_type") }}'
+        description: 0 = Legacy, 1 = Access List, 2 = Dynamic Fee
