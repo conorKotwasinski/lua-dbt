@@ -7,8 +7,8 @@ select
     transactions_root,
     miner,
     nonce,
-    uncles,
-    mix_hash,
+    {# Removed `uncles` in migration to schema v2 #}
+    {# Removed `mix_hash` in migration to schema v2 #}
     logs_bloom,
     state_root,
     difficulty,
@@ -20,4 +20,4 @@ select
     gas_limit,
     base_fee_per_gas,
     extra_data
-from {{ source('default', 'blocks') }}
+from {{ source('ethereum', 'blocks_raw') }}

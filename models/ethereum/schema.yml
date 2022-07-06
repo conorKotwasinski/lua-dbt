@@ -1,7 +1,9 @@
 version: 2
 
 models:
-  - name: blocks
+  - name: ethereum_blocks
+    config:
+      alias: blocks
     description: "Blocks are batches of transactions with a hash of the previous block in the chain."
     meta:
       url: https://ethereum.org/en/developers/docs/blocks/
@@ -105,7 +107,9 @@ models:
       - name: extra_data
         description: "An optional 32-byte space to store extra data"
 
-  - name: transactions
+  - name: ethereum_transactions
+    config:
+      alias: transactions
     description: >
       Transactions are cryptographically signed instructions from accounts. 
       An account will initiate a transaction to update the state of the Ethereum network. 
@@ -218,7 +222,9 @@ models:
         tests:
           - not_null
 
-  - name: logs
+  - name: ethereum_logs
+    config:
+      alias: logs
     description: >
       Logs are are a cheap way to store data on the Ethereum blockchain. 
       An example is using logs to store historical data that can be rendered by a frontend.
@@ -256,7 +262,9 @@ models:
       - name: transaction_index
         description: "Index of this transaction within the block"
 
-  - name: events
+  - name: ethereum_events
+    config:
+      alias: events
     description: >
       Events are decoded logs from contract interactions
     meta:
@@ -359,7 +367,9 @@ models:
       - name: value_hex
         description: "Event parameter value (hex)"
 
-  - name: domains
+  - name: ethereum_domains
+    config:
+      alias: domains
     description: >
       The Ethereum Name Service (ENS) is a distributed, open, and extensible naming system based on the Ethereum blockchain.
     meta:
@@ -388,7 +398,9 @@ models:
       - name: cost
         description: "How much the domain was purchased for (in wei)"
 
-  - name: tags
+  - name: ethereum_tags
+    config:
+      alias: tags
     description: >
       Tags of addresses known to be associated with some real world entity (e.g. Coinbase)
     meta:
@@ -415,7 +427,9 @@ models:
             order by "series_0" desc
             limit 15
 
-  - name: nft_events
+  - name: ethereum_nft_events
+    config:
+      alias: nft_events
     description: >
       Transactions events for known NFT tokens. Filtered and pivoted data from ethereum.events table
     columns:
@@ -440,7 +454,9 @@ models:
       - name: cost
         description: "How much the NFT was purchased for (in wei)"
 
-  - name: abis
+  - name: ethereum_abis
+    config:
+      alias: abis
     description: Application binary interface (ABI) for select Ethereum contracts with contract name
     columns:
       - name: address
