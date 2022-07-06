@@ -26,7 +26,8 @@ def updateAppData(engine, d):
 
 
 def getChClient():
-    client = Client('lua-2.luabase.altinity.cloud',
+    client = Client(
+        'lua-2.luabase.altinity.cloud',
         user='admin',
         password=os.getenv('CH_ADMIN_PASSWORD'),
         port=9440,
@@ -34,7 +35,7 @@ def getChClient():
         verify=False,
         database='default',
         compression=True,
-        settings = {'use_numpy': True}
+        settings={'use_numpy': True}
     )
     return client
 
@@ -88,9 +89,9 @@ if __name__ == '__main__':
                 chCols = df[df.database == db].to_dict(orient='records')
                 for model in y['models']:
                     for chCol in chCols:
-                        if (chCol['table'] == model['name']) or (chCol['table'] == model.get('alias', '')):
+                        if (chCol['table'] == model['name']) or (chCol['table'] == model.get('config', {}).get('alias', '')):
                             for yCol in model['columns']:
-                                if yCol['name'] == chCol['name'] or yCol.get('alias', '') == chCol['name']:
+                                if yCol['name'] == chCol['name'] or yCol.get('config', {}).get('alias', '') == chCol['name']:
                                     yCol['ch'] = chCol
                                     break
                 schema['dbs'][db] = y['models']
@@ -98,7 +99,6 @@ if __name__ == '__main__':
                 print(e)
 
     print('done clickhouse pull...')
-
 
     print(f'updating postgres... {json.dumps(schema)}')
     updateAppData(supaRaw, {
@@ -109,5 +109,3 @@ if __name__ == '__main__':
     print('done updating postgres...')
 
     print('done.')
-
-
