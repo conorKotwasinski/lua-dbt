@@ -226,7 +226,7 @@ models:
       - name: output
       - name: trace_type
         description: Type of trace
-      - name: cell_type
+      - name: call_type
         description: Type of call
       - name: reward_type
         description: Type of reward
