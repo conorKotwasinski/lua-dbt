@@ -195,7 +195,7 @@ models:
   - name: avalanche_traces
     config:
       alias: traces
-    description: ''
+    description: Traces are a way to store extra data on the Avalanche blockchain
     columns:
       - name: block_number
         description: The length of the blockchain (count of blocks)
