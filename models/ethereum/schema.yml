@@ -469,6 +469,22 @@ models:
       - name: name
         description: Contract name
 
+  - name: ethereum_contracts
+    config:
+      alias: contracts
+
+  - name: ethereum_token_transfers
+    config:
+      alias: token_transfers
+
+  - name: ethereum_tokens
+    config:
+      alias: tokens
+
+  - name: ethereum_traces
+    config:
+      alias: traces
+
 metrics:
   - name: blocks_count
     label: Blocks
