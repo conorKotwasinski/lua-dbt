@@ -71,7 +71,8 @@ if __name__ == '__main__':
         'prices',
         'ethereum',
         'polygon',
-        'bitcoin'
+        'bitcoin',
+        'avalanche'
         )
     order by `database`, `table`, `position`;
     '''
