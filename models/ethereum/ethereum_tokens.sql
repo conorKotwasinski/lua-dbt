@@ -7,4 +7,4 @@ select
     name,
     decimals,
     total_supply
-from {{ source('ethereum', 'token_raw') }}
+from {{ source('ethereum', 'tokens_raw') }}
