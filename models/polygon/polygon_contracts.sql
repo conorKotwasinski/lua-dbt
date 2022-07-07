@@ -6,5 +6,5 @@ select
     bytecode,
     function_sighashes,
     is_erc20,
-    is_erc720
+    is_erc721
 from {{ source('polygon', 'contracts_raw') }}
