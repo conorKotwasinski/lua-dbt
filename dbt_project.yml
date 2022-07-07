@@ -17,6 +17,9 @@ clean-targets:
   - "dbt_packages"
   - "logs"
 
+vars:
+  maple_pool_factory_address: '0x2cd79f7f8b38b9c0d80ea6b230441841a31537ec'
+
 tests:
   luabase:
     regression:
