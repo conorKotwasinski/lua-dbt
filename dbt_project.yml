@@ -25,6 +25,10 @@ tests:
     regression:
       enabled: false
 
+seeds:
+  luabase:
+    +schema: "{{ 'seeds_test' if target.name == 'dev' else 'seeds' }}"
+
 models:
   luabase:
     avalanche:
