@@ -188,7 +188,7 @@ models:
       - name: name
         description: Token name
       - name: decimals
-        description: Decimal places for token
+        description: How divisible a token can be
       - name: total_supply
         description: Token total supply
 
