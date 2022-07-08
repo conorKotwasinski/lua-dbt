@@ -6,6 +6,9 @@ sources:
     loader: https://github.com/luabase/lua-py
     tables:
       - name: blocks_raw
+      - name: contracts_raw
       - name: logs_raw
+      - name: token_transfers_raw
+      - name: tokens_raw
       - name: traces_raw
       - name: transactions_raw
