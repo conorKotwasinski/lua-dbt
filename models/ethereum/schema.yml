@@ -1,7 +1,9 @@
 version: 2
 
 models:
-  - name: blocks
+  - name: ethereum_blocks
+    config:
+      alias: blocks
     description: "Blocks are batches of transactions with a hash of the previous block in the chain."
     meta:
       url: https://ethereum.org/en/developers/docs/blocks/
@@ -105,7 +107,9 @@ models:
       - name: extra_data
         description: "An optional 32-byte space to store extra data"
 
-  - name: transactions
+  - name: ethereum_transactions
+    config:
+      alias: transactions
     description: >
       Transactions are cryptographically signed instructions from accounts. 
       An account will initiate a transaction to update the state of the Ethereum network. 
@@ -218,7 +222,9 @@ models:
         tests:
           - not_null
 
-  - name: logs
+  - name: ethereum_logs
+    config:
+      alias: logs
     description: >
       Logs are are a cheap way to store data on the Ethereum blockchain. 
       An example is using logs to store historical data that can be rendered by a frontend.
@@ -256,7 +262,9 @@ models:
       - name: transaction_index
         description: "Index of this transaction within the block"
 
-  - name: events
+  - name: ethereum_events
+    config:
+      alias: events
     description: >
       Events are decoded logs from contract interactions
     meta:
@@ -359,7 +367,9 @@ models:
       - name: value_hex
         description: "Event parameter value (hex)"
 
-  - name: domains
+  - name: ethereum_domains
+    config:
+      alias: domains
     description: >
       The Ethereum Name Service (ENS) is a distributed, open, and extensible naming system based on the Ethereum blockchain.
     meta:
@@ -388,7 +398,9 @@ models:
       - name: cost
         description: "How much the domain was purchased for (in wei)"
 
-  - name: tags
+  - name: ethereum_tags
+    config:
+      alias: tags
     description: >
       Tags of addresses known to be associated with some real world entity (e.g. Coinbase)
     meta:
@@ -415,7 +427,9 @@ models:
             order by "series_0" desc
             limit 15
 
-  - name: nft_events
+  - name: ethereum_nft_events
+    config:
+      alias: nft_events
     description: >
       Transactions events for known NFT tokens. Filtered and pivoted data from ethereum.events table
     columns:
@@ -440,7 +454,9 @@ models:
       - name: cost
         description: "How much the NFT was purchased for (in wei)"
 
-  - name: abis
+  - name: ethereum_abis
+    config:
+      alias: abis
     description: Application binary interface (ABI) for select Ethereum contracts with contract name
     columns:
       - name: address
@@ -452,6 +468,150 @@ models:
         description: Contract ABI (learn [more](https://www.quicknode.com/guides/solidity/what-is-an-abi))
       - name: name
         description: Contract name
+
+  - name: ethereum_contracts
+    config:
+      alias: contracts
+    description: Ethereum contracts
+    columns:
+      - name: block_number
+        description: The length of the blockchain (count of blocks)
+        tests:
+          - not_null
+      - name: block_timestamp
+        description: The time when the block was mined
+        tests:
+          - not_null
+      - name: block_hash
+        description: A unique identifier for the block
+        tests:
+          - not_null
+      - name: address
+        description: Contract address
+      - name: bytecode
+        description: Contract bytecode
+      - name: function_sighashes
+        description: Contract function sighashes
+      - name: is_erc20
+        description: Whether the contract conforms to the ERC20 standard
+      - name: is_erc721
+        description: Whether the contract conforms to the ERC721 standard
+
+  - name: ethereum_token_transfers
+    config:
+      alias: token_transfers
+    description: Ethereum token transfers
+    columns:
+      - name: block_number
+        description: The length of the blockchain (count of blocks)
+        tests:
+          - not_null
+      - name: block_timestamp
+        description: The time when the block was mined
+        tests:
+          - not_null
+      - name: block_hash
+        description: A unique identifier for the block
+        tests:
+          - not_null
+      - name: transaction_hash
+        description: >
+          With the signature hash, the transaction can be cryptographically proven that it came from the sender 
+          and submitted to the network.
+      - name: log_index
+        description: Integer of the event index position in the block
+      - name: token_address
+        description: Token address
+      - name: from_address
+        description: The sending address
+      - name: to_address
+        description: The receiving address
+      - name: value
+        description: The amount transferred from sender to recipient
+
+  - name: ethereum_tokens
+    config:
+      alias: tokens
+    description: Ethereum tokens
+    columns:
+      - name: block_number
+        description: The length of the blockchain (count of blocks)
+        tests:
+          - not_null
+      - name: block_timestamp
+        description: The time when the block was mined
+        tests:
+          - not_null
+      - name: block_hash
+        description: A unique identifier for the block
+        tests:
+          - not_null
+      - name: address
+        description: Token address
+        tests:
+          - unique
+          - not_null
+      - name: symbol
+        description: Token symbol
+      - name: name
+        description: Token name
+      - name: decimals
+        description: Decimal places for token
+      - name: total_supply
+        description: Token total supply
+
+  - name: ethereum_traces
+    config:
+      alias: traces
+    description: Traces are a way to store extra data on the Ethereum blockchain
+    columns:
+      - name: block_number
+        description: The length of the blockchain (count of blocks)
+        tests:
+          - not_null
+      - name: block_timestamp
+        description: The time when the block was mined
+        tests:
+          - not_null
+      - name: block_hash
+        description: A unique identifier for the block
+        tests:
+          - not_null
+      - name: transaction_hash
+        description: >
+          With the signature hash, the transaction can be cryptographically proven that it came from the sender 
+          and submitted to the network.
+      - name: transaction_index
+        description: Index of this transaction within the block
+      - name: from_address
+        description: The sending address
+      - name: to_address
+        description: The receiving address
+      - name: value
+        description: The amount transferred from sender to recipient
+      - name: input
+        description: The data containing non-indexed log parameter
+      - name: output
+      - name: trace_type
+        description: Type of trace
+      - name: call_type
+        description: Type of call
+      - name: reward_type
+        description: Type of reward
+      - name: gas
+        description: The amount of gas used by this transaction
+      - name: gas_used
+        description: The amount of gas used by this transaction
+      - name: subtraces
+        description: The number of subtraces
+      - name: trace_address
+        description: The address of this trace
+      - name: error
+        description: The error message
+      - name: status
+        description: The status of this trace
+      - name: trace_id
+        description: Unique identifier for this trace
 
 metrics:
   - name: blocks_count
