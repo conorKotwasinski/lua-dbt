@@ -9,9 +9,9 @@ clone () {
 run_dbt () {
     if [[ "$1" == "test" ]]
     then
-        dbt build --profiles-dir=. --profile luabase --target prod
+        dbt deps && dbt seed --profiles-dir=. --target prod && dbt build --profiles-dir=. --target prod
     else
-        dbt run --profiles-dir=. --profile luabase --target prod
+        dbt deps && dbt seed --profiles-dir=. --target prod && dbt run --profiles-dir=. --target prod
     fi
 }
 
