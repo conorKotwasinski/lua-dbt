@@ -389,6 +389,12 @@ models:
     config:
       alias: contracts
     description: Polygon contracts
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - address
+            - block_hash
+            - block_number
     columns:
       - name: block_number
         description: The length of the blockchain (count of blocks)
