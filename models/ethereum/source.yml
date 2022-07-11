@@ -9,14 +9,11 @@ sources:
       - name: contracts_raw
       - name: events_raw
       - name: logs_raw
+      - name: tags_raw
       - name: token_transfers_raw
       - name: tokens_raw
       - name: traces_raw
       - name: transactions_raw
-
-  - name: default
-    tables:
-      - name: name_tags2_local
 
   - name: staging
     tables:
