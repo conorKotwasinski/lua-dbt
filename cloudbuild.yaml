@@ -1,9 +1,7 @@
 steps:
 
 - name: 'gcr.io/$PROJECT_ID/lua-dbt'
-  args: [
-    'run_dbt_and_update'
-  ]
+  args: ['run_dbt_and_update']
   secretEnv: ['CH_ADMIN_PASSWORD', 'SUPABASE_SQLALCHEMY_DATABASE_URI']
 
 availableSecrets:
