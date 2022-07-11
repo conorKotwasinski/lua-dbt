@@ -42,7 +42,7 @@ models:
             title: "Blocks by day"
             sql: |
               select 
-              toDate(toDateTime(t.timestamp)) as "xAxis",
+              toDate((t.timestamp)) as "xAxis",
               count(1) as "series_0"
               from ethereum.blocks as t 
               where timestamp > 0
@@ -57,7 +57,7 @@ models:
             title: "Transactions by day"
             sql: |
               select 
-              toDate(toDateTime(t.timestamp)) as "xAxis",
+              toDate((t.timestamp)) as "xAxis",
               sum(transaction_count) as "series_0"
               from ethereum.blocks as t 
               where timestamp > 0
@@ -94,7 +94,7 @@ models:
             title: "Gas by day"
             sql: |
               select 
-              toDate(toDateTime(t.timestamp)) as "xAxis",
+              toDate((t.timestamp)) as "xAxis",
               sum(gas_used) as "series_0"
               from ethereum.blocks as t 
               where timestamp > 0
@@ -235,6 +235,19 @@ models:
         description: "Block number of the transaction associated with this "
         tests:
           - not_null
+      - name: block_timestamp
+        description: "Timestamp when block this transaction was in was mined"
+        meta:
+          explore:
+            title: "Logs by day"
+            sql: |
+              select 
+              toDate(toDateTime(t.block_timestamp)) as "xAxis",
+              count(1) as "series_0"
+              from ethereum.logs as t 
+              where block_timestamp > 0
+              group by "xAxis"
+              order by "xAxis" asc
       - name: block_hash
         description: "A unique identifier for the block"
         tests:

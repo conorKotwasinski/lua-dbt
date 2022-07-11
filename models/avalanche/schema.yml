@@ -9,6 +9,7 @@ models:
       - name: number
         description: The length of the blockchain (count of blocks)
         tests:
+          - unique
           - not_null
         meta:
           # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
@@ -36,7 +37,7 @@ models:
             title: "Blocks by day"
             sql: |
               select 
-              toDate(toDateTime(t.timestamp)) as "xAxis",
+              toDate((t.timestamp)) as "xAxis",
               count(1) as "series_0"
               from avalanche.blocks as t 
               where timestamp > 0
@@ -45,6 +46,7 @@ models:
       - name: hash
         description: A unique identifier for the block
         tests:
+          - unique
           - not_null
       - name: parent_hash
         description: The hash of the parent (prior) block
@@ -98,8 +100,6 @@ models:
           - not_null
       - name: address
         description: Contract address
-        tests:
-          - not_null
       - name: bytecode
         description: Contract bytecode
       - name: function_sighashes
@@ -209,6 +209,7 @@ models:
       - name: address
         description: Token address
         tests:
+          - unique
           - not_null
       - name: symbol
         description: Token symbol
@@ -296,6 +297,7 @@ models:
           With the signature hash, the transaction can be cryptographically proven that it came from the sender 
           and submitted to the network.
         tests:
+          - unique
           - not_null
       - name: nonce
         description: The nonce is used to ensure that each transaction is unique.
