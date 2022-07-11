@@ -10,4 +10,4 @@ select
     type,
     value,
     value_hex
-from {{ source('default', 'events') }}
+from {{ source('ethereum', 'events_raw') }}
