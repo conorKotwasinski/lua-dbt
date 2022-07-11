@@ -32,7 +32,6 @@ models:
       - name: hash
         description: "A unique identifier for the block"
         tests:
-          - unique
           - not_null
       - name: timestamp
         description: "The time when the block was mined"
@@ -376,7 +375,6 @@ models:
       - name: address
         description: Token address
         tests:
-          - unique
           - not_null
       - name: symbol
         description: Token symbol
@@ -389,12 +387,6 @@ models:
     config:
       alias: contracts
     description: Polygon contracts
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - address
-            - block_hash
-            - block_number
     columns:
       - name: block_number
         description: The length of the blockchain (count of blocks)
@@ -440,6 +432,8 @@ models:
         description: >
           With the signature hash, the transaction can be cryptographically proven that it came from the sender 
           and submitted to the network.
+        tests:
+          - not_null
       - name: log_index
         description: Integer of the event index position in the block
       - name: token_address
