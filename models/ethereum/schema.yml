@@ -626,6 +626,34 @@ models:
       - name: trace_id
         description: Unique identifier for this trace
 
+  - name: ethereum_historical_balances
+    description: Historical balance (in ETH) for a given address over time
+    config:
+      alias: historical_balances
+      tags: [ "balances" ]
+    columns:
+      - name: block_number
+        description: The length of the blockchain (count of blocks)
+      - name: block_hash
+        description: A unique identifier for the block
+      - name: block_timestamp
+        description: The time when the block was mined
+      - name: address
+        description: Address of the account
+      - name: balance
+        description: Account balance (ETH)
+
+  - name: ethereum_balances
+    description: Current balance (in ETH) for an account
+    config:
+      alias: balances
+      tags: [ "balances" ]
+    columns:
+      - name: address
+        description: Address of the account
+      - name: balance
+        description: Account balance (ETH)
+
 metrics:
   - name: blocks_count
     label: Blocks
