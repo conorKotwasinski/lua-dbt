@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: intm__ethereum_balance_deltas
+    description: > 
+      Debit and credit deltas for a given address. Debits are comprised of received ETH and 
+      block rewards if the address has mined a block. Credits are comprised of sent ETH and
+      transaction fees.
+    config:
+      alias: balance_deltas
+      tags: ["balances"]
