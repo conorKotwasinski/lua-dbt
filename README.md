@@ -24,6 +24,7 @@
 | `dbt compile --select ethereum.blocks` | Compile/hydrate but do not run or test for the `blocks` model under the `ethereum/` directory |
 | `dbt compile --select blocks`          | Compile/hydrate but do not run or test for the model named `blocks`                           |
 | `dbt debug`                            | Ensure profile configurations work and connection to warehouse is successful                  |
+| `dbt run --select tag:balances`        | Run all models that have `balances` as one of the tags                                        |
 
 ## Local Development
 
