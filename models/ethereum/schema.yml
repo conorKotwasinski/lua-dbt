@@ -630,6 +630,8 @@ models:
     config:
       materialized: table
       alias: demo_maple_pool_deposits
+    columns:
+      - name: block_number
 
 metrics:
   - name: blocks_count
