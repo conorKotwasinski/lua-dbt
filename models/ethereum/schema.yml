@@ -626,6 +626,11 @@ models:
       - name: trace_id
         description: Unique identifier for this trace
 
+  - name: ethereum_maple_pool_deposits
+    config:
+      materialized: table
+      alias: demo_maple_pool_deposits
+
 metrics:
   - name: blocks_count
     label: Blocks
