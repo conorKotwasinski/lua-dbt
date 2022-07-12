@@ -49,7 +49,7 @@ pool_events as (
     from ethereum.events_raw
     where transaction_hash in (select hash from pool_transactions)
         and address in (select address from seeds.maple_pools)
-    group by block_number, transaction_hash
+    group by block_number, transaction_hash, address
 )
 
 select
