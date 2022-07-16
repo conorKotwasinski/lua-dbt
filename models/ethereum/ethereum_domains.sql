@@ -9,7 +9,7 @@ select
     -- {% endfor %}
     max(case when e.name = 'name' then e.value end) as domain,
     max(case when e.name = 'expires' then toDateTime(e.value) end) as expires,
-    max(case when e.name = 'owner' then e.value end) as owner,
+    max(case when e.name = 'owner' then lower(e.value) end) as owner,
     max(case when e.name = 'cost' then e.value end) as cost
     -- max(case when e.name = 'label' then e.value end) as label
 from {{ ref('ethereum_events') }} as e
