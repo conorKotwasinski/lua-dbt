@@ -473,15 +473,15 @@ models:
         tests:
           - not_null
       - name: address
-        description: Contract address
+        description: Address of the contract
       - name: bytecode
-        description: Contract bytecode
+        description: Bytecode of the contract
       - name: function_sighashes
-        description: Contract function sighashes
+        description: 4-byte function signature hash
       - name: is_erc20
-        description: Whether the contract conforms to the ERC20 standard
+        description: Whether the contract is an ERC20 contract
       - name: is_erc721
-        description: Whether the contract conforms to the ERC721 standard
+        description: Whether the contract is an ERC721 contract
 
   - name: ethereum_token_transfers
     config:
