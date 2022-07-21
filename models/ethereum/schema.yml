@@ -440,33 +440,6 @@ models:
             order by "series_0" desc
             limit 15
 
-  - name: ethereum_nft_events
-    config:
-      alias: nft_events
-    description: >
-      Transactions events for known NFT tokens. Filtered and pivoted data from ethereum.events table
-    columns:
-      - name: transaction_hash
-        description: "Integer of the event index position in the block"
-      - name: log_index
-        description: "Index of this log within the transaction"
-      - name: nft_contract_address
-        description: "Address on NFT contract that logged this event"
-      - name: block_number
-        description: "Block number of the transaction associated with this event"
-      - name: from_address
-        description: "Identifier of the sender"
-      - name: to_address
-        description: "Identifier of the recepient"
-      - name: nft_token_id
-        description: "Unique ID of NFT within its collection"
-      - name: event_type
-        description: "Transfer or Mint"
-      - name: marketplace_name
-        description: "[If available] Marketplace on which event occurred"
-      - name: cost
-        description: "How much the NFT was purchased for (in wei)"
-
   - name: ethereum_abis
     config:
       alias: abis
