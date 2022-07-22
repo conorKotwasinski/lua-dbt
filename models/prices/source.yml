@@ -7,5 +7,5 @@ sources:
       - name: btc_usd_raw
       - name: eth_usd_raw
       - name: sol_usd_raw
-      - name: matic_usd_raw
+      - name: polygon_usd_raw
       - name: avax_usd_raw
