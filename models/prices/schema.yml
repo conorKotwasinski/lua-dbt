@@ -5,7 +5,7 @@ models:
     description: "ETH to USD price"
     columns:
       - name: timestamp
-        description: "Time when price was recorded in UTC in 5 minute intervals"
+        description: "Time when price was recorded in UTC in 1 minute intervals"
         meta:
           explore:
             title: "USD high by day"
@@ -31,7 +31,7 @@ models:
     description: "BTC to USD price"
     columns:
       - name: timestamp
-        description: "Time when price was recorded in UTC in 5 minute intervals"
+        description: "Time when price was recorded in UTC in 1 minute intervals"
       - name: price_low
         description: "Low price during the interval"
       - name: price_high
@@ -47,7 +47,7 @@ models:
     description: "SOL to USD price"
     columns:
       - name: timestamp
-        description: "Time when price was recorded in UTC in 5 minute intervals"
+        description: "Time when price was recorded in UTC in 1 minute intervals"
       - name: price_low
         description: "Low price during the interval"
       - name: price_high
@@ -63,7 +63,7 @@ models:
     description: "MATIC to USD price"
     columns:
       - name: timestamp
-        description: "Time when price was recorded in UTC in 5 minute intervals"
+        description: "Time when price was recorded in UTC in 1 minute intervals"
       - name: price_low
         description: "Low price during the interval"
       - name: price_high
@@ -79,7 +79,7 @@ models:
     description: "AVAX to USD price"
     columns:
       - name: timestamp
-        description: "Time when price was recorded in UTC in 5 minute intervals"
+        description: "Time when price was recorded in UTC in 1 minute intervals"
       - name: price_low
         description: "Low price during the interval"
       - name: price_high
