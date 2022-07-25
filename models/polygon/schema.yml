@@ -34,7 +34,7 @@ models:
         tests:
           - not_null
       - name: timestamp
-        description: "The time when the block was mined"
+        description: The timestamp when the block was mined (UTC)
         meta:
           # name the clickhouse columns something that makes sense to echarts, e.g. xAxis
           explore:
@@ -150,7 +150,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: "Timestamp when block this transaction was in was mined"
+        description: The timestamp when the block was mined (UTC)
         meta:
           explore:
             title: "Transactions by day"
@@ -239,7 +239,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: "Timestamp when block this log was in was mined"
+        description: The timestamp when the block was mined (UTC)
         meta:
           explore:
             title: "Logs by day"
@@ -291,7 +291,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: "Timestamp when block this transaction was in was mined"
+        description: The timestamp when the block was mined (UTC)
         meta:
           explore:
             title: "Transactions by day"
@@ -365,7 +365,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The time when the block was mined
+        description: The timestamp when the block was mined (UTC)
         tests:
           - not_null
       - name: block_hash
@@ -393,7 +393,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The time when the block was mined
+        description: The timestamp when the block was mined (UTC)
         tests:
           - not_null
       - name: block_hash
@@ -421,7 +421,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The time when the block was mined
+        description: The timestamp when the block was mined (UTC)
         tests:
           - not_null
       - name: block_hash

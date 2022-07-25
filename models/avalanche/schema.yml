@@ -28,7 +28,7 @@ models:
               max("number") as "max"
               from avalanche.blocks as b
       - name: timestamp
-        description: The time when the block was mined
+        description: The timestamp when the block was mined (UTC)
         tests:
           - not_null
         meta:
@@ -91,7 +91,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The time when the block was mined
+        description: The timestamp when the block was mined (UTC)
         tests:
           - not_null
       - name: block_hash
@@ -121,7 +121,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The time when the block was mined
+        description: The timestamp when the block was mined (UTC)
         tests:
           - not_null
       - name: block_hash
@@ -167,7 +167,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The time when the block was mined
+        description: The timestamp when the block was mined (UTC)
         tests:
           - not_null
       - name: block_hash
@@ -199,7 +199,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The time when the block was mined
+        description: The timestamp when the block was mined (UTC)
         tests:
           - not_null
       - name: block_hash
@@ -230,7 +230,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The time when the block was mined
+        description: The timestamp when the block was mined (UTC)
         tests:
           - not_null
       - name: block_hash
@@ -285,7 +285,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The time when the block was mined
+        description: The timestamp when the block was mined (UTC)
         tests:
           - not_null
       - name: block_hash

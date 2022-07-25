@@ -19,7 +19,7 @@ models:
           - unique
           - not_null
       - name: timestamp
-        description: "The time when the block was mined"
+        description: The timestamp when the block was mined (UTC)
       - name: weight
         description: "Size of block in bytes"
       - name: stripped_size
@@ -61,7 +61,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: "Timestamp when block this transaction was in was mined"
+        description: The timestamp when the block was mined (UTC)
       - name: transaction_index
         description: "Index of this transaction within the block"
       - name: hash
@@ -129,7 +129,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: "Timestamp when block this transaction was in was mined"
+        description: The timestamp when the block was mined (UTC)
       - name: transaction_hash
         description: "A unique identifier for the transaction"
         tests:
@@ -195,7 +195,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: "Timestamp when block this transaction was in was mined"
+        description: The timestamp when the block was mined (UTC)
       - name: transaction_hash
         description: "A unique identifier for the transaction"
         tests:
