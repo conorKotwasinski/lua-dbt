@@ -200,12 +200,14 @@ models:
               order by "xAxis" asc
       - name: gas
         description:  |
-          Gas refers to the unit that measures the amount of computational effort required to execute specific operations on the Ethereum network. 
-          <a href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">Learn more</a>.
+          Gas refers to the unit that measures the amount of computational effort required to execute specific operations on the Ethereum network.
+
+          <a class="text-lime-200" href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">More info</a>
       - name: gas_price
         description: |
           Gas price provided by the sender in Wei
-          <a href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">Learn more</a>.
+
+          <a class="text-lime-200" href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">More info</a>
         meta:
           explore:
             title: "Avg gas price by day"
@@ -238,7 +240,8 @@ models:
       - name: receipt_effective_gas_price
         description: |
           The actual value per gas deducted from the senders account. Replacement of gas_price after EIP-1559
-          <a href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">Learn more</a>.
+
+          <a class="text-lime-200" href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">More info</a>
       - name: hash
         description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
         tests:
