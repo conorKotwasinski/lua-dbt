@@ -197,9 +197,9 @@ models:
               group by "xAxis"
               order by "xAxis" asc
       - name: gas
-        description: "The fee required to conduct a transaction on Ethereum successfully."
+        description: "Gas refers to the unit that measures the amount of computational effort required to execute specific operations on the Ethereum network."
       - name: gas_price
-        description: "Gas price per unit."
+        description: "Gas price provided by the sender in Wei"
         meta:
           explore:
             title: "Avg gas price by day"
