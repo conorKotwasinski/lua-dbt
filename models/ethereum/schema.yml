@@ -159,23 +159,25 @@ models:
               where block_timestamp > 0
               group by "xAxis"
               order by "xAxis" asc
+      - name: block_hash
+        description: A unique identifier for the block
       - name: transaction_index
         description: "Index of this transaction within the block"
         tests:
           - not_null
       - name: nonce
-        description: "The nonce is used to ensure that each transaction is unique."
+        description: "The number of transactions made by the sender prior to this one"
         tests:
           - not_null
       - name: to_address
-        description: "The receiving address (in lowercase)"
+        description: "Address of the receiver. null when its a contract creation transaction (in lowercase)"
         meta:
           search: recipient
           aliases:
             - to
             - recipient
       - name: from_address
-        description: "The identifier of the sender (in lowercase)"
+        description: "Address of the sender (in lowercase)"
         tests:
           - not_null
         meta:
@@ -197,9 +199,13 @@ models:
               group by "xAxis"
               order by "xAxis" asc
       - name: gas
-        description: "Gas refers to the unit that measures the amount of computational effort required to execute specific operations on the Ethereum network."
+        description:  |
+          Gas refers to the unit that measures the amount of computational effort required to execute specific operations on the Ethereum network. 
+          <a href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">Learn more</a>.
       - name: gas_price
-        description: "Gas price provided by the sender in Wei"
+        description: |
+          Gas price provided by the sender in Wei
+          <a href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">Learn more</a>.
         meta:
           explore:
             title: "Avg gas price by day"
@@ -210,13 +216,29 @@ models:
               from ethereum.transactions as t 
               where block_timestamp > 0
               group by "xAxis"
-              order by "xAxis"  
+              order by "xAxis"
+      - name: input
+        description: The data sent along with the transaction
+      - name: receipt_cumulative_gas_used
+        description: The total amount of gas used when this transaction was executed in the block
+      - name: receipt_gas_used
+        description: The amount of gas used by this specific transaction alone
+      - name: receipt_contract_address
+        description: The contract address created, if the transaction was a contract creation, otherwise null
+      - name: receipt_root
+        description: 32 bytes of post-transaction stateroot (pre Byzantium)
+      - name: receipt_status
+        description: Either 1 (success) or 0 (failure) (post Byzantium)
       - name: max_fee_per_gas
         description: "Maximum limit user is willing to pay for their transaction to be executed."
       - name: max_priority_fee_per_gas
         description: "A fee (tip) to incentivize miners to include a transaction in the block."
       - name: transaction_type
         description: "0 = Legacy, 1 = Access List, 2 = Dynamic Fee"
+      - name: receipt_effective_gas_price
+        description: |
+          The actual value per gas deducted from the senders account. Replacement of gas_price after EIP-1559
+          <a href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">Learn more</a>.
       - name: hash
         description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
         tests:
