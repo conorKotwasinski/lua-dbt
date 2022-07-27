@@ -1,4 +1,4 @@
-name: dbt tests
+name: dbt build
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ env:
   CH_HOST: lua-2.luabase.altinity.cloud
 
 jobs:
-  run_tests:
+  run_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -43,5 +43,9 @@ jobs:
         run: poetry install --no-dev
       - name: dbt debug
         run: poetry run dbt debug
+        env:
+          CH_ADMIN_PASSWORD: '${{ steps.secrets.outputs.ch_password }}'
+      - name: dbt test
+        run: poetry run dbt build
         env:
           CH_ADMIN_PASSWORD: '${{ steps.secrets.outputs.ch_password }}'
