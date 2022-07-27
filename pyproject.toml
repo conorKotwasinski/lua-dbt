@@ -7,6 +7,10 @@ authors = ["luabase.com"]
 [tool.poetry.dependencies]
 python = "^3.10"
 dbt-clickhouse = "^1.1.7"
+SQLAlchemy = "^1.4.39"
+psycopg2 = "^2.9.3"
+numpy = "^1.23.1"
+clickhouse-driver = {extras = ["lz4", "numpy"], version = "^0.2.4"}
 
 [tool.poetry.dev-dependencies]
 
