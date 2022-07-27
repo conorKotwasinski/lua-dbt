@@ -209,7 +209,6 @@ models:
       - name: address
         description: Token address
         tests:
-          - unique
           - not_null
       - name: symbol
         description: Token symbol
