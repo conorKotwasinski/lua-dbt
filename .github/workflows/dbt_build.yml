@@ -7,6 +7,9 @@ on:
       - opened
       - reopened
       - edited
+  push:
+    branches:
+      - main
 
 env:
   DBT_PROFILES_DIR: .
@@ -31,6 +34,7 @@ jobs:
         with:
           secrets: |-
             ch_password:projects/1080090551637/secrets/CH_ADMIN_PASSWORD
+            psql_uri:projects/1080090551637/secrets/SUPABASE_SQLALCHEMY_DATABASE_URI
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
@@ -45,7 +49,23 @@ jobs:
         run: poetry run dbt debug
         env:
           CH_ADMIN_PASSWORD: '${{ steps.secrets.outputs.ch_password }}'
-      - name: dbt test
+      - name: dbt deps
+        run: poetry run dbt deps
+        env:
+          CH_ADMIN_PASSWORD: '${{ steps.secrets.outputs.ch_password }}'
+      - name: dbt build
+        if: github.ref != 'refs/heads/main' && github.event_name == 'pull_request'
         run: poetry run dbt build
         env:
           CH_ADMIN_PASSWORD: '${{ steps.secrets.outputs.ch_password }}'
+      - name: dbt build
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: poetry run dbt build -t prod
+        env:
+          CH_ADMIN_PASSWORD: '${{ steps.secrets.outputs.ch_password }}'
+      - name: Update Postgres
+        run: |
+          poetry run python updateLuaSchema.py
+        env:
+          CH_ADMIN_PASSWORD: '${{ steps.secrets.outputs.ch_password }}'
+          SUPABASE_SQLALCHEMY_DATABASE_URI: '${{ steps.secrets.outputs.psql_uri }}'
