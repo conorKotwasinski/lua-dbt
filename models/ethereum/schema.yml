@@ -475,10 +475,19 @@ models:
         tests:
           - unique
           - not_null
-      - name: abi
-        description: Contract ABI (learn [more](https://www.quicknode.com/guides/solidity/what-is-an-abi))
       - name: name
-        description: Contract name
+        description: Name of contract
+      - name: abi
+        description: | 
+          Contract Application Binary Interface (ABI).
+          
+          <a class="text-lime-200" href="https://docs.soliditylang.org/en/develop/abi-spec.html" target="_blank">More info</a>
+      - name: source_code
+        description: Source code of the contrat
+      - name: deployer_address
+        description: |
+          `from_address` field from `ethereum.transactions` if the transaction was a contract creation transaction. A contract creation
+          transaction will have an address in the `receipt_contract_address` field.
 
   - name: ethereum_contracts
     config:

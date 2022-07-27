@@ -15,6 +15,6 @@ sources:
       - name: traces_raw
       - name: transactions_raw
 
-  - name: staging
+  - name: contract
     tables:
-      - name: ethereum_abis
+      - name: details
