@@ -3,6 +3,12 @@ target/
 dbt_packages/
 logs/
 
+# Environment
+.venv/
+
+# Poetry
+poetry.lock
+
 # credentials
 *.env
 
