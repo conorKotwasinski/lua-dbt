@@ -4,10 +4,6 @@ sources:
   - name: bitcoin
     description: Bitcoin raw data
     loader: https://github.com/luabase/lua-py
-    quoting:
-      database: true
-      schema: true
-      identifier: true
     tables:
       - name: blocks_raw
       - name: transaction_inputs_raw

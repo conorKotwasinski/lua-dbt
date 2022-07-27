@@ -26,6 +26,7 @@ seeds:
 
 models:
   luabase:
+    +post-hook: "grant select, show tables on {{ this }} to demo_user, teams_admin"
     avalanche:
       +schema: "{{ 'avalanche_test' if target.name == 'dev' else 'avalanche' }}"
     bitcoin:
