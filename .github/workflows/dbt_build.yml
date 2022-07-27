@@ -64,7 +64,7 @@ jobs:
           CH_ADMIN_PASSWORD: '${{ steps.secrets.outputs.ch_password }}'
       - name: dbt build
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        run: poetry run dbt build -t prod
+        run: poetry run dbt build --exclude ethereum.ethereum_logs -t prod
         env:
           CH_ADMIN_PASSWORD: '${{ steps.secrets.outputs.ch_password }}'
       - name: Update Postgres
