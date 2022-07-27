@@ -2,6 +2,7 @@
 
 [![dbt version](https://img.shields.io/static/v1?label=dbt&message=1.1.0&color=orange)](https://pypi.org/project/dbt-core/)
 [![dbt adapter](https://img.shields.io/static/v1?label=dbt-adapter&message=clickhouse&color=yellow)](https://pypi.org/project/dbt-clickhouse/)
+[![dbt build](https://github.com/luabase/lua-dbt/actions/workflows/dbt_build.yml/badge.svg)](https://github.com/luabase/lua-dbt/actions/workflows/dbt_build.yml)
 
 ## dbt Command Cheatsheet
 
@@ -27,21 +28,16 @@
 
 ## Local Development
 
-**Note**: It is recommended to use a virtual environment
+**Note**: It is recommended to use a virtual environment. This project uses Poetry but you all you need to develop
+is [dbt-clickhouse](https://pypi.org/project/dbt-clickhouse/) installed.
 
-1. Install dependencies
-
-```shell
-pip install -r requirements.txt
-```
-
-2. Create a file called `.env` in the root of the directory
+1. Create a file called `.env` in the root of the directory
 
 ```shell
 touch .env
 ```
 
-3. Add necessary environment variables to the file
+2. Add necessary environment variables to the file
 
 **Note**: Replace `xxx` with the values found in 1Password. Keep `DBT_PROFILES_DIR` as is.
 
@@ -51,19 +47,19 @@ CH_ADMIN_PASSWORD=xxx
 CH_HOST=xxx
 ```
 
-4. Source the `.env` file
+3. Source the `.env` file
 
 ```shell
 export $(grep -v '^#' .env | xargs)
 ```
 
-5. Ensure the credentials work
+4. Ensure the credentials work
 
 ```shell
 dbt debug
 ```
 
-6. Build all models and run tests before you start developing to ensure everything is working prior to you making
+5. Build all models and run tests before you start developing to ensure everything is working prior to you making
    changes
 
 **Note**: Views will show in test databases instead of production. So if you're building there Ethereum models, the
