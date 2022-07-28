@@ -11,10 +11,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - models/
-      - seeds/
-      - updateLuaSchema.py
 
 env:
   DBT_PROFILES_DIR: .
