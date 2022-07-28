@@ -14,6 +14,7 @@ luabase:
       port: 9440
       verify: False
       secure: True
+      cluster: lua-2
       connect_timeout: 10
       send_receive_timeout: 600
     prod:
@@ -25,5 +26,6 @@ luabase:
       port: 9440
       verify: False
       secure: True
+      cluster: lua-2
       connect_timeout: 10
       send_receive_timeout: 600
