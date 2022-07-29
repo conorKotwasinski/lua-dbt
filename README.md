@@ -1,6 +1,6 @@
 # lua-dbt <img src="https://seeklogo.com/images/D/dbt-logo-500AB0BAA7-seeklogo.com.png" width="24" title="hover text">
 
-[![dbt version](https://img.shields.io/static/v1?label=dbt&message=1.1.0&color=orange)](https://pypi.org/project/dbt-core/)
+[![dbt version](https://img.shields.io/static/v1?label=dbt&message=1.2.0&color=orange)](https://pypi.org/project/dbt-core/)
 [![dbt adapter](https://img.shields.io/static/v1?label=dbt-adapter&message=clickhouse&color=yellow)](https://pypi.org/project/dbt-clickhouse/)
 [![dbt build](https://github.com/luabase/lua-dbt/actions/workflows/dbt_build.yml/badge.svg)](https://github.com/luabase/lua-dbt/actions/workflows/dbt_build.yml)
 
