@@ -14,7 +14,6 @@ on:
 
 env:
   DBT_PROFILES_DIR: .
-  CH_HOST: lua-2.luabase.altinity.cloud
 
 jobs:
   run_build:
