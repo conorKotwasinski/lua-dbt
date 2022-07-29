@@ -10,7 +10,7 @@ luabase:
       schema: default
       user: admin
       password: "{{ env_var('CH_ADMIN_PASSWORD') }}"
-      host: "{{ env_var('CH_HOST') }}"
+      host: lua-2.luabase.altinity.cloud
       port: 9440
       verify: False
       secure: True
@@ -22,7 +22,7 @@ luabase:
       schema: default
       user: admin
       password: "{{ env_var('CH_ADMIN_PASSWORD') }}"
-      host: "{{ env_var('CH_HOST') }}"
+      host: lua-2.luabase.altinity.cloud
       port: 9440
       verify: False
       secure: True
