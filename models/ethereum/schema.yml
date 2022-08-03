@@ -464,6 +464,8 @@ models:
             group by "xAxis"
             order by "series_0" desc
             limit 15
+      - name: details
+        description: "Additional address details in JSON format"
 
   - name: ethereum_abis
     config:
