@@ -1,5 +1,6 @@
 select
     address,
     tag,
-    label
+    label,
+    details
 from {{ source('ethereum', 'tags_raw') }}
