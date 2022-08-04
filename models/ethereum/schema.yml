@@ -113,7 +113,7 @@ models:
     description: >
       Transactions are cryptographically signed instructions from accounts. 
       An account will initiate a transaction to update the state of the Ethereum network. 
-      The simplest transaction is transferring ETH from one account to another.
+      The simplest transaction is transferring Eth from one account to another.
     meta:
       url: https://ethereum.org/en/developers/docs/transactions/
       joins:
@@ -161,21 +161,20 @@ models:
               order by "xAxis" asc
       - name: block_hash
         description: A unique identifier for the block
-      - name: transaction_index
-        description: "Index of this transaction within the block"
+      - name: hash
+        description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
         tests:
           - not_null
       - name: nonce
         description: "The number of transactions made by the sender prior to this one"
         tests:
           - not_null
-      - name: to_address
-        description: "Address of the receiver. null when its a contract creation transaction (in lowercase)"
-        meta:
-          search: recipient
-          aliases:
-            - to
-            - recipient
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+        tests:
+          - not_null
+      - name: transaction_type
+        description: "0 = Legacy, 1 = Access List, 2 = Dynamic Fee"
       - name: from_address
         description: "Address of the sender (in lowercase)"
         tests:
@@ -185,11 +184,20 @@ models:
           aliases:
             - from
             - signature
+      - name: to_address
+        description: "Address of the receiver. null when its a contract creation transaction (in lowercase)"
+        meta:
+          search: recipient
+          aliases:
+            - to
+            - recipient
       - name: value
-        description: "The amount of ETH to transfer from sender to recipient (in WEI, a denomination of ETH, 1 eth = 10^18 wei)"
+        description: "The amount transferred from sender to recipient (in Wei, a denomination of Eth, 1 Eth = 10^18 wei)"
+      - name: value_eth
+        description: "The amount transferred from sender to recipient (in Eth)"
         meta:
           explore:
-            title: "ETH transacted by day"
+            title: "Eth transacted by day"
             sql: |
               select 
               toDate(toDateTime(t.block_timestamp)) as "xAxis",
@@ -198,16 +206,18 @@ models:
               where block_timestamp > 0
               group by "xAxis"
               order by "xAxis" asc
+      - name: input
+        description: The data sent along with the transaction
       - name: gas
-        description:  |
+        description: |
           Gas refers to the unit that measures the amount of computational effort required to execute specific operations on the Ethereum network.
 
-          <a class="text-lime-200" href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">More info</a>
+          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>
       - name: gas_price
         description: |
           Gas price provided by the sender in Wei
 
-          <a class="text-lime-200" href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">More info</a>
+          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>
         meta:
           explore:
             title: "Avg gas price by day"
@@ -219,33 +229,41 @@ models:
               where block_timestamp > 0
               group by "xAxis"
               order by "xAxis"
-      - name: input
-        description: The data sent along with the transaction
-      - name: receipt_cumulative_gas_used
-        description: The total amount of gas used when this transaction was executed in the block
-      - name: receipt_gas_used
-        description: The amount of gas used by this specific transaction alone
-      - name: receipt_contract_address
-        description: The contract address created, if the transaction was a contract creation, otherwise null
-      - name: receipt_root
-        description: 32 bytes of post-transaction stateroot (pre Byzantium)
-      - name: receipt_status
-        description: Either 1 (success) or 0 (failure) (post Byzantium)
+      - name: gas_price_eth
+        description: |
+          Gas price provided by the sender in Eth
+          
+          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>
       - name: max_fee_per_gas
         description: "Maximum limit user is willing to pay for their transaction to be executed."
       - name: max_priority_fee_per_gas
         description: "A fee (tip) to incentivize miners to include a transaction in the block."
-      - name: transaction_type
-        description: "0 = Legacy, 1 = Access List, 2 = Dynamic Fee"
+      - name: receipt_cumulative_gas_used
+        description: "The total amount of gas used when this transaction was executed in the block"
+      - name: receipt_gas_used
+        description: "The amount of gas used by this specific transaction alone"
       - name: receipt_effective_gas_price
         description: |
           The actual value per gas deducted from the senders account. Replacement of gas_price after EIP-1559
 
-          <a class="text-lime-200" href="https://ethereum.org/en/developers/docs/gas/#what-is-gas" target="_blank">More info</a>
-      - name: hash
-        description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
-        tests:
-          - not_null
+          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>
+      - name: receipt_contract_address
+        description: "The contract address created, if the transaction was a contract creation, otherwise null"
+      - name: receipt_root
+        description: "32 bytes of post-transaction stateroot (pre Byzantium)"
+      - name: receipt_status
+        description: "Either 1 (success) or 0 (failure) (post Byzantium)"
+      - name: transaction_fee
+        description: |
+          Transaction fee (in Wei) paid by sender (`receipt_gas_used` * `gas_price`)
+          
+          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>
+      - name: transaction_fee_eth
+        description: |
+          Transaction fee (in Eth) paid by sender (`receipt_gas_used` * `gas_price_eth`)
+          
+          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>
+
 
   - name: ethereum_logs
     config:
@@ -414,7 +432,7 @@ models:
       - name: name
         description: Name of contract
       - name: abi
-        description: | 
+        description: |
           Contract Application Binary Interface (ABI).
           
           <a class="text-lime-200" href="https://docs.soliditylang.org/en/develop/abi-spec.html" target="_blank">More info</a>
