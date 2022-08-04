@@ -8,6 +8,7 @@ sources:
       - name: blocks_raw
       - name: contracts_raw
       - name: events_raw
+        identifier: events_raw_v2
       - name: logs_raw
       - name: tags_raw
         identifier: tags_raw_v2
