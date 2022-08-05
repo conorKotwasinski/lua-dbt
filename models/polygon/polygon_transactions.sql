@@ -1,19 +1,26 @@
 select
     block_number,
+    block_timestamp,
     block_hash,
-    transaction_index,
     hash,
     nonce,
+    transaction_index,
+    transaction_type,
     from_address,
     to_address,
     value,
+    {{ wei_to_matic('value') }} as value_matic,
+    input,
     gas,
     gas_price,
-    input,
-    block_timestamp,
-    -- r.gas_used,
+    {{ wei_to_matic('gas_price') }} as gas_price_matic,
     max_fee_per_gas,
     max_priority_fee_per_gas,
-    transaction_type
-    -- r.status
+    receipt_cumulative_gas_used,
+    receipt_gas_used,
+    effective_gas_price as receipt_effective_gas_price,
+    receipt_contract_address,
+    receipt_status,
+    receipt_gas_used * gas_price as transaction_fee,
+    receipt_gas_used * gas_price_matic as transaction_fee_matic
 from {{ source('polygon', 'transactions_raw') }}

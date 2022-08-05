@@ -112,7 +112,7 @@ models:
     description: >
       Transactions are cryptographically signed instructions from accounts. 
       An account will initiate a transaction to update the state of the Polygon network. 
-      The simplest transaction is transferring ETH from one account to another.
+      The simplest transaction is transferring Matic from one account to another.
     meta:
       url: https://ethereum.org/en/developers/docs/transactions/
       joins:
@@ -150,7 +150,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The timestamp when the block was mined (UTC)
+        description: "The timestamp when the block was mined (UTC)"
         meta:
           explore:
             title: "Transactions by day"
@@ -162,21 +162,20 @@ models:
               where block_timestamp > 0
               group by "xAxis"
               order by "xAxis" asc
-      - name: transaction_index
-        description: "Index of this transaction within the block"
+      - name: hash
+        description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
         tests:
           - not_null
       - name: nonce
         description: "The nonce is used to ensure that each transaction is unique."
         tests:
           - not_null
-      - name: to_address
-        description: "The receiving address (in lowercase)"
-        meta:
-          search: recipient
-          aliases:
-            - to
-            - recipient
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+        tests:
+          - not_null
+      - name: transaction_type
+        description: "0 = Legacy, 1 = Access List, 2 = Dynamic Fee"
       - name: from_address
         description: "The identifier of the sender (in lowercase)"
         tests:
@@ -186,8 +185,15 @@ models:
           aliases:
             - from
             - signature
+      - name: to_address
+        description: "The receiving address (in lowercase)"
+        meta:
+          search: recipient
+          aliases:
+            - to
+            - recipient
       - name: value
-        description: "The amount to transfer from sender to recipient (in WEI, a denomination of ETH, 1 eth = 10^18 wei)"
+        description: "The amount to transfer from sender to recipient (in Wei, a denomination of Matic, 1 Matic = 10^18 Wei)"
         meta:
           explore:
             title: "Transacted by day"
@@ -199,10 +205,14 @@ models:
               where block_timestamp > 0
               group by "xAxis"
               order by "xAxis" asc
+      - name: value_matic
+        description: "The amount transferred from sender to recipient (in Matic)"
+      - name: input
+        description: "The data sent along with the transaction"
       - name: gas
-        description: "The fee required to conduct a transaction on Polygon successfully."
+        description: "Gas refers to the unit that measures the amount of computational effort required to execute specific operations on the Polygon network."
       - name: gas_price
-        description: "Gas price per unit."
+        description: "Gas price provided by the sender in Wei"
         meta:
           explore:
             title: "Avg gas price by day"
@@ -213,17 +223,37 @@ models:
               from polygon.transactions as t 
               where block_timestamp > 0
               group by "xAxis"
-              order by "xAxis"  
+              order by "xAxis"
+      - name: gas_price_matic
+        description: "Gas price provided by the sender in Matic"
       - name: max_fee_per_gas
         description: "Maximum limit user is willing to pay for their transaction to be executed."
       - name: max_priority_fee_per_gas
-        description: "A fee (tip) to incentivize miners to include a transaction in the block."
-      - name: transaction_type
-        description: "0 = Legacy, 1 = Access List, 2 = Dynamic Fee"
-      - name: hash
-        description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
-        tests:
-          - not_null
+        description: "A fee (tip) to incentive miners to include a transaction in the block."
+      - name: receipt_cumulative_gas_used
+        description: "The total amount of gas used when this transaction was executed in the block"
+      - name: receipt_gas_used
+        description: "The amount of gas used by this specific transaction alone"
+      - name: receipt_effective_gas_price
+        description: |
+          The actual value per gas deducted from the senders account. Replacement of gas_price after EIP-1559
+          
+          <a class="text-lime-200" href="https://consensys.net/blog/quorum/what-is-eip-1559-how-will-it-change-ethereum/" target="_blank">More info</a>
+      - name: receipt_contract_address
+        description: "The contract address created, if the transaction was a contract creation, otherwise null"
+      - name: receipt_status
+        description: "Either 1 (success) or 0 (failure) (post Byzantium)"
+      - name: transaction_fee
+        description: |
+          Transaction fee (in Wei) paid by sender (`receipt_gas_used` * `gas_price`)
+          
+          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>
+      - name: transaction_fee_matic
+        description: |
+          Transaction fee (in Matic) paid by sender (`receipt_gas_used` * `gas_price_matic`)
+          
+          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>
+
 
   - name: polygon_logs
     config:

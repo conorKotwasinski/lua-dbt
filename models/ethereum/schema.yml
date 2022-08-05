@@ -147,7 +147,7 @@ models:
         tests:
           - not_null
       - name: block_timestamp
-        description: The timestamp when the block was mined (UTC)
+        description: "The timestamp when the block was mined (UTC)"
         meta:
           explore:
             title: "Transactions by day"
@@ -160,7 +160,7 @@ models:
               group by "xAxis"
               order by "xAxis" asc
       - name: block_hash
-        description: A unique identifier for the block
+        description: "A unique identifier for the block"
       - name: hash
         description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
         tests:
@@ -176,7 +176,7 @@ models:
       - name: transaction_type
         description: "0 = Legacy, 1 = Access List, 2 = Dynamic Fee"
       - name: from_address
-        description: "Address of the sender (in lowercase)"
+        description: "Address of the sender"
         tests:
           - not_null
         meta:
@@ -185,7 +185,7 @@ models:
             - from
             - signature
       - name: to_address
-        description: "Address of the receiver. null when its a contract creation transaction (in lowercase)"
+        description: "Address of the receiver. NULL when its a contract creation transaction"
         meta:
           search: recipient
           aliases:
@@ -193,8 +193,6 @@ models:
             - recipient
       - name: value
         description: "The amount transferred from sender to recipient (in Wei, a denomination of Eth, 1 Eth = 10^18 wei)"
-      - name: value_eth
-        description: "The amount transferred from sender to recipient (in Eth)"
         meta:
           explore:
             title: "Eth transacted by day"
@@ -206,8 +204,10 @@ models:
               where block_timestamp > 0
               group by "xAxis"
               order by "xAxis" asc
+      - name: value_eth
+        description: "The amount transferred from sender to recipient (in Eth)"
       - name: input
-        description: The data sent along with the transaction
+        description: "The data sent along with the transaction"
       - name: gas
         description: |
           Gas refers to the unit that measures the amount of computational effort required to execute specific operations on the Ethereum network.
@@ -237,7 +237,7 @@ models:
       - name: max_fee_per_gas
         description: "Maximum limit user is willing to pay for their transaction to be executed."
       - name: max_priority_fee_per_gas
-        description: "A fee (tip) to incentivize miners to include a transaction in the block."
+        description: "A fee (tip) to incentive miners to include a transaction in the block."
       - name: receipt_cumulative_gas_used
         description: "The total amount of gas used when this transaction was executed in the block"
       - name: receipt_gas_used
@@ -246,7 +246,7 @@ models:
         description: |
           The actual value per gas deducted from the senders account. Replacement of gas_price after EIP-1559
 
-          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>
+          <a class="text-lime-200" href="https://consensys.net/blog/quorum/what-is-eip-1559-how-will-it-change-ethereum/" target="_blank">More info</a>
       - name: receipt_contract_address
         description: "The contract address created, if the transaction was a contract creation, otherwise null"
       - name: receipt_root
