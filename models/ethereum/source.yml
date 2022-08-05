@@ -11,12 +11,11 @@ sources:
         identifier: events_raw_v2
       - name: logs_raw
       - name: tags_raw
-        identifier: tags_raw_v2
+        identifier: tags_deduped_raw
       - name: token_transfers_raw
       - name: tokens_raw
       - name: traces_raw
       - name: transactions_raw
-      - name: tags_deduped_raw
 
   - name: contract
     tables:
