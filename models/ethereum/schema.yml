@@ -419,6 +419,26 @@ models:
       - name: details
         description: "Additional address details in JSON format"
 
+  - name: ethereum_tags_deduped
+    config:
+      alias: tags_deduped
+    description: >
+      Deduped tags of addresses known to be associated with some real world entity (e.g. Coinbase)
+      and all their associated etherscan labels
+    meta:
+      url: https://luabase.notion.site/Tags-521d6955dc1e472ba37dba71569666a3
+    columns:
+      - name: address
+        description: "The unique public key identifier that points to an Ethereum-compatible wallet"
+        tests:
+          - not_null
+      - name: tag
+        description: "Public name tag (often a company / entity) associated with the address"
+      - name: label
+        description: "First label for the address that shows up in Etherscan"
+      - name: details
+        description: "Array of all Etherscan labels for the address"
+
   - name: ethereum_abis
     config:
       alias: abis

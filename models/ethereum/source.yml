@@ -16,6 +16,7 @@ sources:
       - name: tokens_raw
       - name: traces_raw
       - name: transactions_raw
+      - name: tags_deduped_raw
 
   - name: contract
     tables:
