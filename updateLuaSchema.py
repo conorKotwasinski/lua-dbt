@@ -71,6 +71,7 @@ if __name__ == '__main__':
         'prices',
         'ethereum',
         'polygon',
+        'polygon_testnet',
         'bitcoin',
         'avalanche'
         )
