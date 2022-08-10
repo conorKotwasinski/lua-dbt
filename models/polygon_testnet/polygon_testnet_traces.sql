@@ -1,0 +1,21 @@
+select
+    block_number,
+    block_hash,
+    block_timestamp,
+    transaction_hash,
+    transaction_index,
+    to_address,
+    from_address,
+    value,
+    input,
+    trace_type,
+    trace_id,
+    call_type,
+    reward_type,
+    gas,
+    gas_used,
+    subtraces,
+    trace_address,
+    error,
+    status
+from {{ source('polygon_testnet', 'traces_raw') }}

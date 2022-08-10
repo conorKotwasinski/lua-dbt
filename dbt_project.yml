@@ -35,5 +35,7 @@ models:
       +schema: "{{ 'ethereum_test' if target.name == 'dev' else 'ethereum' }}"
     polygon:
       +schema: "{{ 'polygon_test' if target.name == 'dev' else 'polygon' }}"
+    polygon_testnet:
+      +schema: "{{ 'polygon_testnet_test' if target.name == 'dev' else 'polygon_testnet' }}"
     prices:
       +schema: "{{ 'prices_test' if target.name == 'dev' else 'prices' }}"

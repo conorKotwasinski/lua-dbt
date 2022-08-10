@@ -46,7 +46,6 @@ models:
       - name: hash
         description: A unique identifier for the block
         tests:
-          - unique
           - not_null
       - name: parent_hash
         description: The hash of the parent (prior) block

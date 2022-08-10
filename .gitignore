@@ -6,9 +6,6 @@ logs/
 # Environment
 .venv/
 
-# Poetry
-poetry.lock
-
 # credentials
 *.env
 
