@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: ethereum
     description: Ethereum raw data
-    loader: https://github.com/luabase/lua-py
+    loader: https://github.com/luabase/lua-ethereum-etl
     tables:
       - name: blocks_raw
       - name: contracts_raw

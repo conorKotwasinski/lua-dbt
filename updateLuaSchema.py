@@ -73,7 +73,8 @@ if __name__ == '__main__':
         'polygon',
         'polygon_testnet',
         'bitcoin',
-        'avalanche'
+        'avalanche',
+        'fantom'
         )
     order by `database`, `table`, `position`;
     '''

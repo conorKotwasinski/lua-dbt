@@ -1,0 +1,21 @@
+select
+    block_number,
+    block_hash,
+    block_timestamp,
+    transaction_hash,
+    transaction_index,
+    from_address,
+    to_address,
+    value,
+    input,
+    trace_type,
+    trace_id,
+    call_type,
+    reward_type,
+    gas,
+    gas_used,
+    subtraces,
+    trace_address,
+    error,
+    status
+from {{ source('fantom', 'traces_raw') }}

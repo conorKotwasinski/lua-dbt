@@ -37,5 +37,7 @@ models:
       +schema: "{{ 'polygon_test' if target.name == 'dev' else 'polygon' }}"
     polygon_testnet:
       +schema: "{{ 'polygon_testnet_test' if target.name == 'dev' else 'polygon_testnet' }}"
+    fantom:
+      +schema: "{{ 'fantom_test' if target.name == 'dev' else 'fantom' }}"
     prices:
       +schema: "{{ 'prices_test' if target.name == 'dev' else 'prices' }}"
