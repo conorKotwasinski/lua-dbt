@@ -7,6 +7,7 @@ luabase:
   outputs:
     dev:
       type: clickhouse
+      threads: 8
       schema: default
       user: admin
       password: "{{ env_var('CH_ADMIN_PASSWORD') }}"
@@ -19,6 +20,7 @@ luabase:
       send_receive_timeout: 600
     prod:
       type: clickhouse
+      threads: 8
       schema: default
       user: admin
       password: "{{ env_var('CH_ADMIN_PASSWORD') }}"
