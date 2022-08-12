@@ -26,24 +26,18 @@ seeds:
 
 models:
   luabase:
+    +post-hook: "{{ grant_select(this) }}"
     avalanche:
       +schema: "{{ 'avalanche_test' if target.name == 'dev' else 'avalanche' }}"
-      +post-hook: "{{ grant_select(this) }}"
     bitcoin:
       +schema: "{{ 'bitcoin_test' if target.name == 'dev' else 'bitcoin' }}"
-      +post-hook: "{{ grant_select(this) }}"
     ethereum:
       +schema: "{{ 'ethereum_test' if target.name == 'dev' else 'ethereum' }}"
-      +post-hook: "{{ grant_select(this) }}"
     polygon:
       +schema: "{{ 'polygon_test' if target.name == 'dev' else 'polygon' }}"
-      +post-hook: "{{ grant_select(this) }}"
     polygon_testnet:
       +schema: "{{ 'polygon_testnet_test' if target.name == 'dev' else 'polygon_testnet' }}"
-      +post-hook: "{{ grant_select(this) }}"
     fantom:
       +schema: "{{ 'fantom_test' if target.name == 'dev' else 'fantom' }}"
-      +post-hook: "{{ grant_select(this) }}"
     prices:
       +schema: "{{ 'prices_test' if target.name == 'dev' else 'prices' }}"
-      +post-hook: "{{ grant_select(this) }}"
