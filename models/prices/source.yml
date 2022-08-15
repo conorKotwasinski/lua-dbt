@@ -5,7 +5,22 @@ sources:
     description: Prices raw data
     tables:
       - name: btc_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
       - name: eth_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
       - name: sol_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
       - name: polygon_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
       - name: avax_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }

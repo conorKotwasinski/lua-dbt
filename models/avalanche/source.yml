@@ -6,9 +6,36 @@ sources:
     loader: https://github.com/luabase/avalanche-etl
     tables:
       - name: blocks_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+
       - name: contracts_raw
+        loaded_at_field: block_timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+
       - name: logs_raw
+        loaded_at_field: block_timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+
       - name: token_transfers_raw
+        loaded_at_field: block_timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+
       - name: tokens_raw
+        loaded_at_field: block_timestamp
+        freshness:
+          error_after: { count: 1, period: day }
+
       - name: traces_raw
+        loaded_at_field: block_timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+
       - name: transactions_raw
+        loaded_at_field: block_timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
