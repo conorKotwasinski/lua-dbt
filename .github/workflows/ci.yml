@@ -3,23 +3,21 @@ name: CI
 on:
   workflow_dispatch:
   pull_request:
-    types:
-      - opened
-      - reopened
-      - edited
-      - synchronize
   push:
     branches:
       - main
 
 jobs:
-  run_build:
+  dev_build:
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main' && github.event_name == 'pull_request'
     steps:
+      # Github
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
+      # gCloud
       - id: auth
         name: gCloud Auth
         uses: google-github-actions/auth@v0
@@ -29,11 +27,53 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0
       - name: Use gcloud CLI
         run: gcloud info
-      - name: rsync dev
-        if: github.ref != 'refs/heads/main' && github.event_name == 'pull_request'
+      - name: rsync
+        run: gsutil -m rsync -r -d -x '.git/|.idea/|.env|.github/|.venv/|logs/|target/|analyses/|poetry.lock' . gs://lua-dbt/dev
+      # dbt
+      - name: Send request to dbt services
+        id: buildReq
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://lua-dbt-services-msgn5tdnsa-uc.a.run.app/dbt/dev/build'
+          method: 'GET'
+          timeout: 240000  # 4 minutes
+      - name: dbt build status
+        if: fromJson(steps.buildReq.outputs.response).passing != 1
         run: |
-          gsutil -m rsync -r -d -x '.git/|.idea/|.env|.github/|.venv/|logs/|target/|analyses/|poetry.lock' . gs://lua-dbt/dev
-      - name: rsync prod
-        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+          echo ${{ toJson(steps.buildReq.outputs.response) }} | jq
+          exit 1
+
+  prod_build:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    steps:
+      # Github
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      # gCloud
+      - id: auth
+        name: gCloud Auth
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: '${{ secrets.gcp_credentials }}'
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+      - name: Use gcloud CLI
+        run: gcloud info
+      - name: rsync
+        run: gsutil -m rsync -r -d -x '.git/|.idea/|.env|.github/|.venv/|logs/|target/|analyses/|poetry.lock' . gs://lua-dbt/prod
+      # dbt
+      - name: Send request to dbt services
+        id: buildReq
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://lua-dbt-services-msgn5tdnsa-uc.a.run.app/dbt/prod/build'
+          method: 'GET'
+          timeout: 240000  # 4 minutes
+      - name: dbt build status
+        if: fromJson(steps.buildReq.outputs.response).passing != 1
         run: |
-          gsutil -m rsync -r -d -x '.git/|.idea/|.env|.github/|.venv/|logs/|target/|analyses/|poetry.lock' . gs://lua-dbt/prod
+          echo ${{ toJson(steps.buildReq.outputs.response) }} | jq
+          exit 1
