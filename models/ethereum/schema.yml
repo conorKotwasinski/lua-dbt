@@ -164,6 +164,9 @@ models:
         description: "With the signature hash, the transaction can be cryptographically proven that it came from the sender and submitted to the network."
         tests:
           - not_null
+          - unique:
+              config:
+                where: "block_timestamp > (today() - 30)" # only check last 30 days
       - name: nonce
         description: "The number of transactions made by the sender prior to this one"
         tests:

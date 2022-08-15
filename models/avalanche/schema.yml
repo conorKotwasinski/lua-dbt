@@ -295,8 +295,10 @@ models:
           With the signature hash, the transaction can be cryptographically proven that it came from the sender 
           and submitted to the network.
         tests:
-          - unique
           - not_null
+          - unique:
+              config:
+                where: "block_timestamp > (today() - 30)" # only check last 30 days
       - name: nonce
         description: "The nonce is used to ensure that each transaction is unique."
         tests:
