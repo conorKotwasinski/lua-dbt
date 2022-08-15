@@ -42,6 +42,13 @@ jobs:
         run: |
           echo ${{ toJson(steps.buildReq.outputs.response) }} | jq
           exit 1
+      - name: Sync app data
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://lua-dbt-services-msgn5tdnsa-uc.a.run.app/sync-app/dev'
+          method: 'GET'
+          timeout: 60000  # 1 minute
+
 
   prod_build:
     runs-on: ubuntu-latest
@@ -77,3 +84,9 @@ jobs:
         run: |
           echo ${{ toJson(steps.buildReq.outputs.response) }} | jq
           exit 1
+      - name: Sync app data
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://lua-dbt-services-msgn5tdnsa-uc.a.run.app/sync-app/prod'
+          method: 'GET'
+          timeout: 60000  # 1 minute
