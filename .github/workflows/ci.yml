@@ -38,7 +38,7 @@ jobs:
           method: 'GET'
           timeout: 240000  # 4 minutes
       - name: dbt build status
-        if: fromJson(steps.buildReq.outputs.response).passing != 1
+        if: fromJson(steps.buildReq.outputs.response).is_passing != 1
         run: |
           echo ${{ toJson(steps.buildReq.outputs.response) }} | jq
           exit 1
@@ -80,7 +80,7 @@ jobs:
           method: 'GET'
           timeout: 240000  # 4 minutes
       - name: dbt build status
-        if: fromJson(steps.buildReq.outputs.response).passing != 1
+        if: fromJson(steps.buildReq.outputs.response).is_passing != 1
         run: |
           echo ${{ toJson(steps.buildReq.outputs.response) }} | jq
           exit 1

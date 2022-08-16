@@ -1,0 +1,108 @@
+version: 2
+
+models:
+  - name: avalanche_blocks
+    config:
+      alias: blocks
+    description: "Blocks are batches of transactions with a hash of the previous block in the chain."
+    columns:
+
+      - name: number
+        description: "The length of the blockchain (count of blocks)"
+        tests:
+          - not_null
+          - unique:
+              config:
+                where: "timestamp between (today() - 5) and date_sub(hour, 2, now())"
+        meta:
+          explore:
+            title: "Blocks"
+            type: "bigNumber"
+            subheader: "Mining {{past_30_days}} per day (last 30 days)"
+            formats:
+              past_30_days: '#,##0'
+              total: '#,##0.0,,"M"'
+            sql: |
+              select 
+              count(1) as "total",
+              sum(case when b.timestamp >= subtractDays(today(), 30) then 1 else 0 end) / 30 as past_30_days,
+              min("number") as "min",
+              max("number") as "max"
+              from avalanche.blocks as b
+
+      - name: timestamp
+        description: "The timestamp when the block was mined (UTC)"
+        tests:
+          - not_null
+        meta:
+          explore:
+            title: "Blocks by day"
+            sql: |
+              select 
+              toDate((t.timestamp)) as "xAxis",
+              count(1) as "series_0"
+              from avalanche.blocks as t 
+              where timestamp > 0
+              group by "xAxis"
+              order by "xAxis" asc
+
+      - name: hash
+        description: "A unique identifier for the block"
+        tests:
+          - not_null
+          - unique:
+              config:
+                where: "timestamp between (today() - 5) and date_sub(hour, 2, now())"
+
+      - name: parent_hash
+        description: The hash of the parent (prior) block
+        tests:
+          - not_null
+          - unique:
+              config:
+                where: "timestamp between (today() - 5) and date_sub(hour, 2, now())"
+
+      - name: nonce
+        description: "The nonce used to mine the block"
+
+      - name: sha3_uncles
+        description: "A sibling block of the parent block"
+
+      - name: logs_bloom
+        description: "The bloom filter for the logs in the block"
+
+      - name: transactions_root
+        description: "The root hash of the Merkle tree of all the transactions in the block (32 byte string)"
+
+      - name: state_root
+        description: "The root of the state trie at the end of the block"
+
+      - name: receipts_root
+        description: "The hash of the root node of the trie that contains the receipts of all transactions listed in this block"
+
+      - name: miner
+        description: "The address of the miner who mined the block"
+
+      - name: difficulty
+        description: "The effort required to mine the block"
+
+      - name: total_difficulty
+        description: "Cumulative difficulty of all blocks until the current block"
+
+      - name: size
+        description: "Size of block in bytes"
+
+      - name: extra_data
+        description: "An optional 32-byte space to store extra data"
+
+      - name: gas_limit
+        description: "The amount of gas used by the block"
+
+      - name: gas_used
+        description: "The gas limit allowed in the block"
+
+      - name: transaction_count
+        description: "Number of transactions in the block"
+
+      - name: base_fee_per_gas
+        description: "The base fee for this block (see EIP-1559)"

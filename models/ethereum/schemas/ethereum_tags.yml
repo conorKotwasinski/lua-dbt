@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: ethereum_tags
+    config:
+      alias: tags
+    description: >
+      Tags of addresses known to be associated with some real world entity (e.g. Coinbase)
+    meta:
+      url: https://luabase.notion.site/Tags-521d6955dc1e472ba37dba71569666a3
+    columns:
+      - name: address
+        description: "The unique public key identifier that points to an Ethereum-compatible wallet"
+        tests:
+          - not_null
+
+      - name: tag
+        description: >
+          Deduped tags of addresses known to be associated with some real world entity (e.g. Coinbase)
+          and all their associated etherscan labels
+        meta:
+          url: https://luabase.notion.site/Tags-521d6955dc1e472ba37dba71569666a3
+
+      - name: label
+        description: "First label for the address that shows up in Etherscan"
+        explore:
+          title: "Tags by label"
+          type: "bar"
+          sql: |
+            select 
+            count(1) as "series_0",
+            t.label as "xAxis"
+            from ethereum.tags t
+            where t.label != ''
+            group by "xAxis"
+            order by "series_0" desc
+            limit 15
+
+      - name: tag_details
+        description: "Additional tags associated with address in Array format"
+
+      - name: label_details
+        description: "Additional labels associated with address in Array format"

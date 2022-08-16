@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: polygon_testnet_logs
+    config:
+      alias: logs
+    description: >
+      Logs are are a cheap way to store data on the Polygon blockchain. 
+      An example is using logs to store historical data that can be rendered by a frontend.
+    meta:
+      url: https://web3js.readthedocs.io/en/v1.5.2/web3-eth.html#getpastlogs
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - transaction_hash
+            - log_index
+          where: "block_timestamp between (today() - 1) and date_sub(hour, 2, now())"
+    columns:
+      - name: block_number
+        description: "Block number of the transaction associated with this "
+        tests:
+          - not_null
+
+      - name: block_timestamp
+        description: The timestamp when the block was mined (UTC)
+        meta:
+          explore:
+            title: "Logs by day"
+            sql: |
+              select 
+              toDate(toDateTime(t.block_timestamp)) as "xAxis",
+              count(1) as "series_0"
+              from polygon.logs as t 
+              where block_timestamp > 0
+              group by "xAxis"
+              order by "xAxis" asc
+
+      - name: block_hash
+        description: "A unique identifier for the block"
+        tests:
+          - not_null
+
+      - name: address
+        description: "Address this event originated from."
+        tests:
+          - not_null
+
+      - name: data
+        description: "The data containing non-indexed log parameter"
+        tests:
+          - not_null
+
+      - name: transaction_hash
+        description: "Integer of the event index position in the block"
+
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+
+      - name: log_index
+        description: "Integer of the event index position in the block"
+
+      - name: topic1
+        description: "Topic 1-3 contains indexed parameters of the log"
+
+      - name: topic2
+        description: "Topic 1-3 contains indexed parameters of the log"
+
+
+      - name: topic3
+        description: "Topic 1-3 contains indexed parameters of the log"
+
+      - name: topic4
+        description: "Topic 1-3 contains indexed parameters of the log"

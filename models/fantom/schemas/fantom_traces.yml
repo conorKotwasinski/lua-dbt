@@ -1,0 +1,101 @@
+version: 2
+
+models:
+  - name: fantom_traces
+    config:
+      alias: traces
+    description: >
+      Traces are a way to store extra data on the Fantom blockchain.
+    meta:
+      url: https://geth.ethereum.org/docs/dapp/tracing
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - transaction_hash
+            - trace_id
+          where: "block_timestamp between (today() - 1) and date_sub(hour, 2, now())"
+    columns:
+      - name: block_number
+        description: "Block number of the transaction associated with this "
+        tests:
+          - not_null
+
+      - name: block_hash
+        description: "A unique identifier for the block"
+        tests:
+          - not_null
+
+      - name: block_timestamp
+        description: The timestamp when the block was mined (UTC)
+        meta:
+          explore:
+            title: "Transactions by day"
+            sql: |
+              select 
+              toDate(toDateTime(t.block_timestamp)) as "xAxis",
+              count(1) as "series_0"
+              from fantom.traces as t 
+              where block_timestamp > 0
+              group by "xAxis"
+              order by "xAxis" asc
+
+      - name: transaction_hash
+        description: "Integer of the event index position in the block"
+
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+
+      - name: from_address
+        description: "Address this event originated from."
+
+      - name: to_address
+        description: "Address this event originated from."
+
+      - name: value
+        description: "The amount of ETH to transfer from sender to recipient (in WEI, a denomination of ETH, 1 eth = 10^18 wei)"
+        meta:
+          explore:
+            title: "Trace value by day"
+            sql: |
+              select 
+              toDate(toDateTime(t.block_timestamp)) as "xAxis",
+              sum("value"/1e18) as "series_0"
+              from fantom.traces as t 
+              where block_timestamp > 0
+              group by "xAxis"
+              order by "xAxis" asc
+
+      - name: input
+        description: "The data containing non-indexed log parameter"
+
+      - name: trace_type
+        description: "Type of trace"
+
+      - name: trace_id
+        description: "Unique identifier for this trace"
+        tests:
+          - not_null
+
+      - name: call_type
+        description: "Type of call"
+
+      - name: reward_type
+        description: "Type of reward"
+
+      - name: gas
+        description: "The amount of gas used by this transaction"
+
+      - name: gas_used
+        description: "The amount of gas used by this transaction"
+
+      - name: subtraces
+        description: "The number of subtraces"
+
+      - name: trace_address
+        description: "The address of this trace"
+
+      - name: error
+        description: "The error message"
+
+      - name: status
+        description: "The status of this trace"

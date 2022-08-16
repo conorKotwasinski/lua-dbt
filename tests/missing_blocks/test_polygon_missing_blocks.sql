@@ -1,19 +1,14 @@
 with t as (
     select
-        number,
-        hash,
-        any(number) over (order by number rows between 1 following and 1 following) as check_number,
-        any(parent_hash) over (order by number rows between 1 following and 1 following) as check_hash
-    from {{ source('polygon', 'blocks_raw') }}
-),
-
-missing_blocks as (
-    select number, hash, check_number, check_number - 1 as missing_block, check_hash
-    from t
-    where hash != check_hash
-        and check_number != 0
-    order by missing_block
+        number as block_number,
+        any(number) over (order by number rows between 1 preceding and 1 preceding) as parent_block_number
+    from {{ ref('polygon_blocks') }}
+    where timestamp between (today() - 5) and date_sub(hour, 2, now())
 )
 
-select missing_block from missing_blocks
-where missing_block not in (select number from {{ source('polygon', 'blocks_raw') }})
+select
+    block_number,
+    parent_block_number
+from t
+where parent_block_number != 0
+    and block_number != parent_block_number + 1

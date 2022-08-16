@@ -1,0 +1,17 @@
+version: 2
+
+metrics:
+  - name: blocks_count
+    label: Blocks
+    model: blocks
+    description: "The total number of blocks"
+    type: count
+    sql: number
+    meta: { }
+  - name: blocks_uniq
+    label: Blocks
+    model: transactions
+    description: "The unique number of blocks"
+    type: uniq
+    sql: block_numbers
+    meta: { }

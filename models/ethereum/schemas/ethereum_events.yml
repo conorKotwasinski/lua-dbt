@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: ethereum_events
+    config:
+      alias: events
+    description: >
+      Events are decoded logs from contract interactions
+    meta:
+      url: https://luabase.notion.site/Decoded-Data-Contract-ABI-s-4756776acf9c40efacf0018de7119a52
+    columns:
+      - name: block_number
+        description: "Block number of the transaction associated with this "
+        tests:
+          - not_null
+
+      - name: block_timestamp
+        description: "The timestamp when the block was mined (UTC)"
+
+      - name: block_hash
+        description: "A unique identifier for the block"
+
+      - name: transaction_hash
+        description: "Integer of the event index position in the block"
+
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+
+      - name: log_index
+        description: "Index of this log within this transactions logs"
+
+      - name: address
+        description: "Address of contract that emitted the event"
+
+      - name: contract_name
+        description: "Provided name for contract"
+
+      - name: function_name
+        description: "Name of contract function that emitted the event"
+
+      - name: event_name
+        description: "Name of the event"
+
+      - name: event_arg_index
+        description: "Positional index of event argument in list of event arguments"
+
+      - name: event_arg_name
+        description: "Name of event argument"
+
+      - name: event_arg_value
+        description: "Value for event argument"
+
+      - name: event_arg_type
+        description: "Data type for event argument"

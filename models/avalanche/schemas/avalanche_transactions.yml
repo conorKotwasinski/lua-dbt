@@ -1,0 +1,139 @@
+version: 2
+
+models:
+  - name: avalanche_transactions
+    config:
+      alias: transactions
+    description: >
+      Transactions are cryptographically signed instructions from accounts.
+      An account will initiate a transaction to update the state of the network.
+    columns:
+      - name: block_number
+        description: "Block number of this transaction"
+        tests:
+          - not_null
+
+      - name: block_hash
+        description: "A unique identifier for the block"
+        tests:
+          - not_null
+
+      - name: block_timestamp
+        description: "The timestamp when the block was mined (UTC)"
+        tests:
+          - not_null
+
+      - name: hash
+        description: >
+          With the signature hash, the transaction can be cryptographically proven that it came from the sender 
+          and submitted to the network.
+        tests:
+          - not_null
+          - unique:
+              config:
+                where: "block_timestamp between (today() - 5) and date_sub(hour, 2, now())"
+
+      - name: nonce
+        description: "The nonce is used to ensure that each transaction is unique."
+
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+        tests:
+          - not_null
+
+      - name: transaction_type
+        description: "0 = Legacy, 1 = Access List, 2 = Dynamic Fee"
+
+      - name: from_address
+        description: "The identifier of the sender (in lowercase)"
+        tests:
+          - not_null
+        meta:
+          search: signature
+          aliases:
+            - from
+            - signature
+
+      - name: to_address
+        description: "The receiving address (in lowercase)"
+        meta:
+          search: recipient
+          aliases:
+            - to
+            - recipient
+
+      - name: value
+        description: "The amount to transfer from sender to recipient (in Wei, a denomination of Avax, 1 Avax = 10^18 Wei)"
+        meta:
+          explore:
+            title: "Transacted by day"
+            sql: |
+              select 
+              toDate(toDateTime(t.block_timestamp)) as "xAxis",
+              sum("value"/1e18) as "series_0"
+              from avalanche.transactions as t 
+              where block_timestamp > 0
+              group by "xAxis"
+              order by "xAxis" asc
+
+      - name: value_avax
+        description: "The amount transferred from sender to recipient (in Avax)"
+
+      - name: input
+        description: "The data sent along with the transaction"
+
+      - name: gas
+        description: "Gas refers to the unit that measures the amount of computational effort required to execute specific operations on the Avalanche network."
+
+      - name: gas_price
+        description: "Gas price provided by the sender (in Wei, a denomination of Avax, 1 Avax = 10^18 Wei)"
+        meta:
+          explore:
+            title: "Avg gas price by day"
+            sql: |
+              select 
+              toDate(toDateTime(t.block_timestamp)) as "xAxis",
+              avg("gas_price"/1e9) as "series_0"
+              from avalanche.transactions as t 
+              where block_timestamp > 0
+              group by "xAxis"
+              order by "xAxis"
+
+      - name: gas_price_avax
+        description: "Gas price provided by the sender in Avax"
+
+      - name: max_fee_per_gas
+        description: "Maximum limit user is willing to pay for their transaction to be executed."
+
+      - name: max_priority_fee_per_gas
+        description: "A fee (tip) to incentive miners to include a transaction in the block."
+
+      - name: receipt_cumulative_gas_used
+        description: "The total amount of gas used when this transaction was executed in the block"
+
+      - name: receipt_gas_used
+        description: "The amount of gas used by this specific transaction alone"
+
+      - name: receipt_effective_gas_price
+        description: |
+          The actual value per gas deducted from the senders account. Replacement of gas_price after EIP-1559
+          
+          <a class="text-lime-200" href="https://consensys.net/blog/quorum/what-is-eip-1559-how-will-it-change-ethereum/" target="_blank">More info</a>
+
+      - name: receipt_contract_address
+        description: "The contract address created, if the transaction was a contract creation, otherwise null"
+
+      - name: receipt_status
+        description: "Either 1 (success) or 0 (failure) (post Byzantium)"
+
+      - name: transaction_fee
+        description: |
+          Transaction fee (in Wei) paid by sender (`receipt_gas_used` * `gas_price`)
+          
+          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>
+
+      - name: transaction_fee_avax
+        description: |
+          Transaction fee (in Avax) paid by sender (`receipt_gas_used` * `gas_price_avax`)
+          
+          <a class="text-lime-200" href="https://www.notion.so/luabase/The-ABCs-and-WTFs-of-Gas-and-Transaction-Fees-578ba4615cad492f9c55fa3c06084c1d" target="_blank">More info</a>

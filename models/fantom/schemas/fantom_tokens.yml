@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: fantom_tokens
+    config:
+      alias: tokens
+    description: Fantom tokens
+    columns:
+      - name: block_number
+        description: "The length of the blockchain (count of blocks)"
+        tests:
+          - not_null
+
+      - name: block_hash
+        description: "A unique identifier for the block"
+        tests:
+          - not_null
+
+      - name: block_timestamp
+        description: "The timestamp when the block was mined (UTC)"
+        tests:
+          - not_null
+
+      - name: address
+        description: "Token address"
+        tests:
+          - not_null
+
+      - name: symbol
+        description: "Token symbol"
+
+      - name: name
+        description: "Contract name"
+
+      - name: decimals
+        description: "How divisible a token can be"
+
+      - name: total_supply
+        description: "Total supply of the token"

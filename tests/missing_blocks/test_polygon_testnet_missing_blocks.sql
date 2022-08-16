@@ -2,7 +2,7 @@ with t as (
     select
         number as block_number,
         any(number) over (order by number rows between 1 preceding and 1 preceding) as parent_block_number
-    from {{ ref('ethereum_blocks') }}
+    from {{ ref('polygon_testnet_blocks') }}
     where timestamp between (today() - 5) and date_sub(hour, 2, now())
 )
 

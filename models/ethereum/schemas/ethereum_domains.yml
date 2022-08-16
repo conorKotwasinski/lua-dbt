@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: ethereum_domains
+    config:
+      alias: domains
+    description: >
+      The Ethereum Name Service (ENS) is a distributed, open, and extensible naming system based on the Ethereum blockchain.
+    meta:
+      url: https://docs.ens.domains/
+    columns:
+      - name: block_number
+        description: "Block number of the transaction associated with this domain"
+        tests:
+          - not_null
+
+      - name: block_hash
+        description: "A unique identifier for the block"
+        tests:
+          - not_null
+
+      - name: transaction_hash
+        description: "Integer of the event index position in the block"
+
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+
+      - name: log_index
+        description: "Integer of the event index position in the block"
+
+      - name: domain
+        description: "ENS domain that was purchased."
+
+      - name: expires
+        description: "Expiration date of the domain"
+
+      - name: owner
+        description: "Address that owns the domain"
+
+      - name: cost
+        description: "How much the domain was purchased for (in wei)"

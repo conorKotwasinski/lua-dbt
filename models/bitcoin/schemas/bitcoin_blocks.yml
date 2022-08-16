@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: bitcoin_blocks
+    config:
+      alias: blocks
+    description: "Blocks are batches of transactions with a hash of the previous block in the chain."
+    meta:
+      url: https://developer.bitcoin.org/reference/block_chain.html
+    columns:
+      - name: number
+        description: "The length of the blockchain (count of blocks)"
+        tests:
+          - unique
+          - not_null
+
+      - name: hash
+        description: "A unique identifier for the block"
+        tests:
+          - unique
+          - not_null
+
+      - name: timestamp
+        description: "The timestamp when the block was mined (UTC)"
+
+      - name: weight
+        description: "Size of block in bytes"
+
+      - name: stripped_size
+        description: "Stripped size of block in bytes"
+
+      - name: size
+        description: "Size of block in bytes"
+
+      - name: version
+        description: "Version"
+
+      - name: merkle_root
+        description: "The root hash of the Merkle tree of all the transactions in the block (32 byte string)"
+
+      - name: miner
+        description: "The address of the miner who mined the block"
+
+      - name: nonce
+        description: "The nonce used to mine the block"
+
+      - name: bits
+        description: ""
+
+      - name: coinbase_param
+        description: ""
+
+      - name: transaction_count
+        description: "Transaction count"
