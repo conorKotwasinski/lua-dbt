@@ -86,16 +86,8 @@ python-versions = ">=3.7"
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
-name = "clickhouse-cityhash"
-version = "1.0.2.3"
-description = "Python-bindings for CityHash, a fast non-cryptographic hash algorithm"
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "clickhouse-connect"
-version = "0.2.2"
+version = "0.2.3"
 description = "ClickHouse core driver, SqlAlchemy, and Superset libraries"
 category = "main"
 optional = false
@@ -122,13 +114,6 @@ optional = false
 python-versions = ">=3.4, <4"
 
 [package.dependencies]
-clickhouse-cityhash = {version = ">=1.0.2.1", optional = true, markers = "extra == \"lz4\""}
-lz4 = [
-    {version = "<=3.0.1", optional = true, markers = "implementation_name == \"pypy\" or implementation_name == \"pypy\" and extra == \"lz4\""},
-    {version = "*", optional = true, markers = "implementation_name != \"pypy\" or implementation_name != \"pypy\" and extra == \"lz4\""},
-]
-numpy = {version = ">=1.12.0", optional = true, markers = "extra == \"numpy\""}
-pandas = {version = ">=0.24.0", optional = true, markers = "extra == \"numpy\""}
 pytz = "*"
 tzlocal = "*"
 
@@ -202,17 +187,6 @@ description = "Clean single-source support for Python 3 and 2"
 category = "main"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
-
-[[package]]
-name = "greenlet"
-version = "1.1.2"
-description = "Lightweight in-process concurrent programming"
-category = "main"
-optional = false
-python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
-
-[package.extras]
-docs = ["sphinx"]
 
 [[package]]
 name = "hologram"
@@ -307,32 +281,6 @@ test = ["pytest-cov (>=2.6)", "pytest (>4.0)"]
 zmq = ["pyzmq"]
 
 [[package]]
-name = "lz4"
-version = "3.0.1"
-description = "LZ4 Bindings for Python"
-category = "main"
-optional = false
-python-versions = ">=3.5"
-
-[package.extras]
-docs = ["sphinx (>=1.6.0)", "sphinx-bootstrap-theme"]
-flake8 = ["flake8"]
-tests = ["pytest (!=3.3.0)", "psutil", "pytest-cov"]
-
-[[package]]
-name = "lz4"
-version = "4.0.2"
-description = "LZ4 Bindings for Python"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.extras]
-docs = ["sphinx (>=1.6.0)", "sphinx-bootstrap-theme"]
-flake8 = ["flake8"]
-tests = ["pytest (!=3.3.0)", "psutil", "pytest-cov"]
-
-[[package]]
 name = "markupsafe"
 version = "2.0.1"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -389,14 +337,6 @@ extra = ["lxml (>=4.6)", "pygraphviz (>=1.9)", "pydot (>=1.4.2)", "sympy (>=1.10
 test = ["pytest (>=7.1)", "pytest-cov (>=3.0)", "codecov (>=2.1)"]
 
 [[package]]
-name = "numpy"
-version = "1.23.1"
-description = "NumPy is the fundamental package for array computing with Python."
-category = "main"
-optional = false
-python-versions = ">=3.8"
-
-[[package]]
 name = "packaging"
 version = "21.3"
 description = "Core utilities for Python packages"
@@ -408,22 +348,6 @@ python-versions = ">=3.6"
 pyparsing = ">=2.0.2,<3.0.5 || >3.0.5"
 
 [[package]]
-name = "pandas"
-version = "1.4.3"
-description = "Powerful data structures for data analysis, time series, and statistics"
-category = "main"
-optional = false
-python-versions = ">=3.8"
-
-[package.dependencies]
-numpy = {version = ">=1.21.0", markers = "python_version >= \"3.10\""}
-python-dateutil = ">=2.8.1"
-pytz = ">=2020.1"
-
-[package.extras]
-test = ["hypothesis (>=5.5.3)", "pytest (>=6.0)", "pytest-xdist (>=1.31)"]
-
-[[package]]
 name = "parsedatetime"
 version = "2.4"
 description = "Parse human-readable date/time text."
@@ -433,14 +357,6 @@ python-versions = "*"
 
 [package.dependencies]
 future = "*"
-
-[[package]]
-name = "psycopg2"
-version = "2.9.3"
-description = "psycopg2 - Python-PostgreSQL Database Adapter"
-category = "main"
-optional = false
-python-versions = ">=3.6"
 
 [[package]]
 name = "pycparser"
@@ -504,7 +420,7 @@ python-versions = "*"
 
 [[package]]
 name = "pytz"
-version = "2022.1"
+version = "2022.2.1"
 description = "World timezone definitions, modern and historical"
 category = "main"
 optional = false
@@ -556,38 +472,6 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
-name = "sqlalchemy"
-version = "1.4.40"
-description = "Database Abstraction Library"
-category = "main"
-optional = false
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,>=2.7"
-
-[package.dependencies]
-greenlet = {version = "!=0.4.17", markers = "python_version >= \"3\" and (platform_machine == \"aarch64\" or platform_machine == \"ppc64le\" or platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"win32\" or platform_machine == \"WIN32\")"}
-
-[package.extras]
-aiomysql = ["greenlet (!=0.4.17)", "aiomysql"]
-aiosqlite = ["typing_extensions (!=3.10.0.1)", "greenlet (!=0.4.17)", "aiosqlite"]
-asyncio = ["greenlet (!=0.4.17)"]
-asyncmy = ["greenlet (!=0.4.17)", "asyncmy (>=0.2.3,!=0.2.4)"]
-mariadb_connector = ["mariadb (>=1.0.1,!=1.1.2)"]
-mssql = ["pyodbc"]
-mssql_pymssql = ["pymssql"]
-mssql_pyodbc = ["pyodbc"]
-mypy = ["sqlalchemy2-stubs", "mypy (>=0.910)"]
-mysql = ["mysqlclient (>=1.4.0,<2)", "mysqlclient (>=1.4.0)"]
-mysql_connector = ["mysql-connector-python"]
-oracle = ["cx_oracle (>=7,<8)", "cx_oracle (>=7)"]
-postgresql = ["psycopg2 (>=2.7)"]
-postgresql_asyncpg = ["greenlet (!=0.4.17)", "asyncpg"]
-postgresql_pg8000 = ["pg8000 (>=1.16.6,!=1.29.0)"]
-postgresql_psycopg2binary = ["psycopg2-binary"]
-postgresql_psycopg2cffi = ["psycopg2cffi"]
-pymysql = ["pymysql (<1)", "pymysql"]
-sqlcipher = ["sqlcipher3-binary"]
-
-[[package]]
 name = "sqlparse"
 version = "0.4.2"
 description = "A non-validating SQL parser."
@@ -613,7 +497,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "tzdata"
-version = "2022.1"
+version = "2022.2"
 description = "Provider of IANA time zone data"
 category = "main"
 optional = false
@@ -662,7 +546,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "67a89e31cdc2dc0a9da79dacb07908ca25b1dc69ca3c8ba0db09bd62f34dc899"
+content-hash = "61a85c7997a1e8e2b03125d44d70d790f131931273c45ba18c28a3bd6d50f8db"
 
 [metadata.files]
 agate = []
@@ -672,7 +556,6 @@ certifi = []
 cffi = []
 charset-normalizer = []
 click = []
-clickhouse-cityhash = []
 clickhouse-connect = []
 clickhouse-driver = []
 colorama = []
@@ -680,7 +563,6 @@ dbt-clickhouse = []
 dbt-core = []
 dbt-extractor = []
 future = []
-greenlet = []
 hologram = []
 idna = []
 isodate = []
@@ -688,17 +570,13 @@ jinja2 = []
 jsonschema = []
 leather = []
 logbook = []
-lz4 = []
 markupsafe = []
 mashumaro = []
 minimal-snowplow-tracker = []
 msgpack = []
 networkx = []
-numpy = []
 packaging = []
-pandas = []
 parsedatetime = []
-psycopg2 = []
 pycparser = []
 pyparsing = []
 pyrsistent = []
@@ -710,7 +588,6 @@ pytz-deprecation-shim = []
 pyyaml = []
 requests = []
 six = []
-sqlalchemy = []
 sqlparse = []
 text-unidecode = []
 typing-extensions = []
