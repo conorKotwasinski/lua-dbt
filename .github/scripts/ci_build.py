@@ -2,7 +2,7 @@ import os
 import sys
 import requests
 
-PROD = "https://lua-dbt-services-backend-msgn5tdnsa-uc.a.run.app/api/v1/jobs/f7264201da2146e3a63bf3acff1d7a4f/trigger"
+PROD = "https://lua-dbt-services-backend-msgn5tdnsa-uc.a.run.app/api/v1/jobs/bb5c2d564c58426586a1287f5abbdb36/trigger"
 QA = "https://lua-dbt-services-backend-msgn5tdnsa-uc.a.run.app/api/v1/jobs/f7264201da2146e3a63bf3acff1d7a4f/trigger"
 
 if __name__ == "__main__":
