@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: ethereum_calls
+    config:
+      alias: calls
+    description: >
+      Calls are decoded transaction calls from contract interactions
+    meta:
+      url: https://luabase.notion.site/Decoded-Data-Contract-ABI-s-4756776acf9c40efacf0018de7119a52
+    columns:
+      - name: block_number
+        description: "Block number of the transaction associated with this "
+        tests:
+          - not_null
+
+      - name: block_hash
+        description: "A unique identifier for the block"
+
+      - name: block_timestamp
+        description: "The timestamp when the block was mined (UTC)"
+
+      - name: transaction_hash
+        description: "Integer of the event index position in the block"
+
+      - name: transaction_index
+        description: "Index of this transaction within the block"
+
+      - name: caller_address
+        description: "Address for caller who invoked the contract with a function call"
+
+      - name: contract_address
+        description: "Address of contract that emitted the event"
+
+      - name: contract_name
+        description: "Provided name for contract"
+
+      - name: input
+        description: "The data sent along with the transaction"
+
+      - name: call_status
+        description: "Call status of the transaction. Either 1 (success) or 0 (failure) (post Byzantium)"
+
+      - name: function_name
+        description: "Name of function called"
+
+      - name: function_input_name
+        description: "Name of function input argument"
+
+      - name: function_input_value
+        description: "Value of function input argument"
+
+      - name: function_input_type
+        description: "Data type of function input argument"
