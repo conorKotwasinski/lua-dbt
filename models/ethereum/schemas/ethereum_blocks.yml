@@ -87,12 +87,6 @@ models:
       - name: nonce
         description: "The nonce used to mine the block"
 
-      - name: uncles
-        description: "The hashes of the uncles in the block"
-
-      - name: mix_hash
-        description: "a unique identifier for that block."
-
       - name: logs_bloom
         description: "The bloom filter for the logs in the block"
 

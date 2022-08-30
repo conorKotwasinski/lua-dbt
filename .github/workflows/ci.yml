@@ -11,24 +11,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Github
+      # GitHub
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
-
-      # gCloud
-      - id: auth
-        name: gCloud Auth
-        uses: google-github-actions/auth@v0
-        with:
-          credentials_json: '${{ secrets.gcp_credentials }}'
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0
-      - name: Use gcloud CLI
-        run: gcloud info
-      - name: rsync
-        run: gsutil -m rsync -r -d -x '.git/|.idea/|.env|.github/|.venv/|logs/|target/|analyses/|poetry.lock' . gs://lua-dbt/dev
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v6
 
       # Python
       - name: Setup Python
@@ -47,11 +37,22 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: |
           echo "TARGET=prod" >> $GITHUB_ENV
-      - name: Run build script
-        run: python .github/scripts/dbt_build.py
+      - name: Run CI build
+        id: ci-build
+        run: python .github/scripts/ci_build.py
         env:
           TARGET: ${{ env.TARGET }}
-      - name: Run sync script
+          GH_BRANCH: ${{ steps.branch-name.outputs.current_branch }}
+      - name: Comment PR
+        if: always()
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          message: |
+            ## 🏃 dbt Run Results
+            
+            Status: ${{ env.DBT_RUN_ICON }}
+            View Run: https://lua-dbt-services-frontend-msgn5tdnsa-uc.a.run.app/?run_id=${{ env.DBT_RUN_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run sync app data
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: python .github/scripts/sync_app.py
-        env:
-          TARGET: ${{ env.TARGET }}

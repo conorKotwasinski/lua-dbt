@@ -11,7 +11,7 @@ select
     toUInt256(max(case when event_arg_name = 'cost' then event_arg_value end)) as cost
 from {{ ref('ethereum_events') }} as e
 where event_name = 'NameRegistered'
-    and address = '0x283af0b28c62c092c9727f1ee09c02ca627eb7f5'
+    and contract_address = '0x283af0b28c62c092c9727f1ee09c02ca627eb7f5'
 group by 
     block_number,
     block_timestamp,

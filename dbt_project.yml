@@ -2,7 +2,7 @@ name: "luabase"
 version: "1.0.0"
 config-version: 2
 
-profile: luabase
+profile: "luabase"
 
 model-paths: [ "models" ]
 analysis-paths: [ "analyses" ]
@@ -18,15 +18,33 @@ clean-targets:
   - "logs"
 
 vars:
-  maple_pool_factory_address: '0x2cd79f7f8b38b9c0d80ea6b230441841a31537ec'
+  grant_databases:
+    - "avalanche"
+    - "bitcoin"
+    - "ethereum"
+    - "polygon"
+    - "polygon_testnet"
+    - "fantom"
+    - "prices"
+    - "ethereum_dapps"
+  grant_users:
+    - "demo_user"
+    - "teams_admin"
+
+on-run-end:
+  - "{{ grant_select_on_databases(var('grant_databases'), var('grant_users')) }}"
 
 seeds:
   luabase:
     +schema: "{{ 'seeds_test' if target.name == 'dev' else 'seeds' }}"
 
+quoting:
+  identifier: true
+
 models:
   luabase:
-    +post-hook: "{{ grant_select(this) }}"
+
+    # Base
     avalanche:
       +schema: "{{ 'avalanche_test' if target.name == 'dev' else 'avalanche' }}"
     bitcoin:
@@ -41,3 +59,9 @@ models:
       +schema: "{{ 'fantom_test' if target.name == 'dev' else 'fantom' }}"
     prices:
       +schema: "{{ 'prices_test' if target.name == 'dev' else 'prices' }}"
+
+    # Derived
+    ethereum_dapps:
+      +meta:
+        show_in_app: false
+      +schema: "{{ 'ethereum_dapps_test' if target.name == 'dev' else 'ethereum_dapps' }}"

@@ -6,3 +6,4 @@ select
     deployer_address
 from {{ source('contract', 'details') }}
 where public
+    and source = 'https://api.etherscan.io'

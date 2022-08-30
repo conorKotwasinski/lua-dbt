@@ -14,11 +14,11 @@ models:
         tests:
           - not_null
 
-      - name: block_timestamp
-        description: "The timestamp when the block was mined (UTC)"
-
       - name: block_hash
         description: "A unique identifier for the block"
+
+      - name: block_timestamp
+        description: "The timestamp when the block was mined (UTC)"
 
       - name: transaction_hash
         description: "Integer of the event index position in the block"
@@ -29,20 +29,14 @@ models:
       - name: log_index
         description: "Index of this log within this transactions logs"
 
-      - name: address
+      - name: contract_address
         description: "Address of contract that emitted the event"
 
       - name: contract_name
         description: "Provided name for contract"
 
-      - name: function_name
-        description: "Name of contract function that emitted the event"
-
       - name: event_name
         description: "Name of the event"
-
-      - name: event_arg_index
-        description: "Positional index of event argument in list of event arguments"
 
       - name: event_arg_name
         description: "Name of event argument"

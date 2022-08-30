@@ -29,7 +29,7 @@ models:
       - name: symbol
         description: "Token symbol"
 
-      - name: decimal
+      - name: decimals
         description: "How divisible a token can be"
 
       - name: total_supply

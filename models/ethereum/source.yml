@@ -15,9 +15,13 @@ sources:
         freshness:
           error_after: { count: 1, period: hour }
 
+      - name: calls_raw
+        loaded_at_field: block_timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+
       - name: events_raw
-        identifier: events_raw_v2
-        loaded_at_field: _etl_load_time
+        loaded_at_field: block_timestamp
         freshness:
           error_after: { count: 1, period: hour }
 

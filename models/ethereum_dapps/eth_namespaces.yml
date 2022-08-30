@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: eth_namespaces
+    config:
+      alias: _namespaces
+    description: "Application namespaces used to create dApp models"
+    columns:
+      - name: namespace
+        description: "Top-level logical collection of addresses that act together under an application"
+      - name: contract_name
+        description: "Contract name (from ABI table)"
+      - name: contract_address
+        description: "Contract address"

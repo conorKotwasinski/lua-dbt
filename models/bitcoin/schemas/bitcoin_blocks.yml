@@ -38,9 +38,6 @@ models:
       - name: merkle_root
         description: "The root hash of the Merkle tree of all the transactions in the block (32 byte string)"
 
-      - name: miner
-        description: "The address of the miner who mined the block"
-
       - name: nonce
         description: "The nonce used to mine the block"
 

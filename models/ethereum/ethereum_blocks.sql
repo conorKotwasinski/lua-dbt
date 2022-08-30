@@ -7,8 +7,6 @@ select
     transactions_root,
     miner,
     nonce,
-    {# Removed `uncles` in migration to schema v2 #}
-    {# Removed `mix_hash` in migration to schema v2 #}
     logs_bloom,
     state_root,
     difficulty,

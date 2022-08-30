@@ -1,16 +1,12 @@
-import os
 import sys
+
 import requests
 from pprint import pprint
 
+URL = "https://lua-dbt-services-backend-msgn5tdnsa-uc.a.run.app/api/v1/projects/0684933f5c3247a2ba73e9e687474957/sync"
 
 if __name__ == "__main__":
-    target = os.getenv("TARGET", "dev")
-    url = f"https://lua-dbt-services-msgn5tdnsa-uc.a.run.app/sync_app?target={target}"
-    res = requests.get(url=url)
-    data = res.json()
-    status = data.get("status", "error")
-    pprint(data)
-    if status == "success":
-        sys.exit(0)
-    sys.exit(1)
+    res = requests.get(url=URL)
+    pprint(res.json())
+    assert res.status_code == 200
+    sys.exit(0)
