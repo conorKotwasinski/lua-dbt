@@ -4,6 +4,8 @@
 [![dbt adapter](https://img.shields.io/static/v1?label=dbt-adapter&message=clickhouse&color=yellow)](https://pypi.org/project/dbt-clickhouse/)
 [![CI](https://github.com/luabase/lua-dbt/actions/workflows/ci.yml/badge.svg)](https://github.com/luabase/lua-dbt/actions/workflows/ci.yml)
 
+View [dbt Run App](https://lua-dbt-services-frontend-msgn5tdnsa-uc.a.run.app/)
+
 ## dbt Command Cheatsheet
 
 | Command                                | Description                                                                                   |
