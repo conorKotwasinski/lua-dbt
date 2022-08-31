@@ -44,7 +44,6 @@ touch .env
 ```text
 DBT_PROFILES_DIR=.
 CH_ADMIN_PASSWORD=xxx
-CH_HOST=xxx
 ```
 
 3. Source the `.env` file
@@ -79,6 +78,7 @@ using the `--target`/`-t` flag when calling dbt commands
 
 ```shell
 dbt build --target prod
+# or
 dbt build -t prod
 ```
 
