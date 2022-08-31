@@ -23,8 +23,3 @@ models:
 
       - name: source_code
         description: "Source code of the contract"
-
-      - name: deployer_address
-        description: |
-          `from_address` field from `ethereum.transactions` if the transaction was a contract creation transaction. A contract creation
-          transaction will have an address in the `receipt_contract_address` field.
