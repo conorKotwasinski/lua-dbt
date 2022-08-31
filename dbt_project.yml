@@ -22,15 +22,16 @@ vars:
     - "avalanche"
     - "bitcoin"
     - "ethereum"
+    - "ethereum_dapps"
+    - "fantom"
     - "polygon"
     - "polygon_testnet"
-    - "fantom"
     - "prices"
-    - "ethereum_dapps"
   grant_users:
     - "demo_user"
     - "teams_admin"
 
+# Add databases and users above to grant full DB read-only access to the user
 on-run-end:
   - "{{ grant_select_on_databases(var('grant_databases'), var('grant_users')) }}"
 
@@ -38,6 +39,8 @@ seeds:
   luabase:
     +schema: "{{ 'seeds_test' if target.name == 'dev' else 'seeds' }}"
 
+# DO NOT REMOVE
+# This helps both dbt docs and the dApp models render correctly
 quoting:
   identifier: true
 
