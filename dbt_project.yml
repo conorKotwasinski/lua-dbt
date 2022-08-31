@@ -63,5 +63,5 @@ models:
     # Derived
     ethereum_dapps:
       +meta:
-        show_in_app: false
+        show_in_app: true
       +schema: "{{ 'ethereum_dapps_test' if target.name == 'dev' else 'ethereum_dapps' }}"
