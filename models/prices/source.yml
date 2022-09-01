@@ -24,3 +24,32 @@ sources:
         loaded_at_field: timestamp
         freshness:
           error_after: { count: 1, period: hour }
+      - name: uni_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+      - name: aave_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+      - name: comp_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+      - name: axs_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+      - name: grt_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+      - name: flow_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+      - name: fil_usd_raw
+        loaded_at_field: timestamp
+        freshness:
+          error_after: { count: 1, period: hour }
+

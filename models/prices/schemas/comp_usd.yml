@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: comp_usd
+    description: "COMP to USD price"
+    columns:
+      - name: timestamp
+        description: "Time when price was recorded in UTC in 1 minute intervals"
+
+      - name: price_low
+        description: "Low price during the interval"
+
+      - name: price_high
+        description: "High price during the interval"
+
+      - name: price_open
+        description: "High price during the interval"
+
+      - name: price_close
+        description: "High price during the interval"
+
+      - name: volume
+        description: "Trade volume during the interval"
